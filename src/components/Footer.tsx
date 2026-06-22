@@ -1,4 +1,4 @@
-import { FiInstagram, FiTwitter, FiFacebook } from "react-icons";
+import { FiInstagram, FiTwitter, FiFacebook } from "react-icons/fi";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
