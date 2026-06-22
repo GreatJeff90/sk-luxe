@@ -1,4 +1,3 @@
-// src/components/Navbar.tsx
 import Link from 'next/link';
 import { ShoppingBag, Search, User } from 'lucide-react';
 
@@ -10,6 +9,7 @@ export default function Navbar() {
         
         <div className="hidden md:flex gap-8 text-brand-green uppercase tracking-widest text-xs font-medium">
           <Link href="/shop" className="hover:text-brand-green/60 transition">Shop</Link>
+          <Link href="/blog" className="hover:text-brand-green/60 transition">Blog</Link>
           <Link href="/collections" className="hover:text-brand-green/60 transition">Collections</Link>
         </div>
 

@@ -7,17 +7,17 @@ const slides = [
   {
     image: "/hero.jpg",
     title: "Defined by Detail.",
-    desc: "Timeless craft, modern soul. Experience the new collection.",
+    desc: "Timeless craft, modern soul.",
   },
   {
     image: "/hero-2.jpg",
     title: "Artisan Excellence.",
-    desc: "Handcrafted quality designed for the modern lifestyle.",
+    desc: "Handcrafted quality designed for life.",
   },
   {
     image: "/hero-3.jpg",
     title: "Timeless Elegance.",
-    desc: "Elevating your wardrobe with essential luxury staples.",
+    desc: "Elevating your wardrobe staples.",
   },
 ];
 
@@ -27,7 +27,7 @@ export default function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % slides.length);
-    }, 4000); // Slides change every 6 seconds
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
 
@@ -50,17 +50,30 @@ export default function Hero() {
             priority
             className="object-cover opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-green/50" />
+          
+          {/* Subtle gradient overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-green/80 to-transparent" />
 
-          {/* Text Content */}
-          <div className="relative z-10 h-full flex items-center justify-center text-center px-6 text-brand-cream">
-            <div className="max-w-xl">
-              <h1 className="text-5xl md:text-8xl font-serif mb-6 tracking-tight drop-shadow-md">
+          {/* Text Content - Aligned Left like image_9d18e1.jpg */}
+          <div className="relative z-10 h-full flex items-end md:items-center px-8 md:px-24 pb-24 md:pb-0 text-brand-cream">
+            <div className="max-w-2xl">
+              <motion.span 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="inline-block px-3 py-1 mb-6 border border-brand-cream/30 text-xs uppercase tracking-[0.2em]"
+              >
+                New Collection 2026
+              </motion.span>
+              
+              <h1 className="text-6xl md:text-9xl font-bold mb-6 tracking-tighter">
                 {slides[index].title}
               </h1>
-              <p className="text-lg md:text-xl mb-10 font-light tracking-wide opacity-90">
+              
+              <p className="text-lg md:text-2xl mb-10 font-light opacity-90 max-w-md">
                 {slides[index].desc}
               </p>
+              
               <button className="bg-brand-cream text-brand-green px-10 py-4 uppercase tracking-[0.2em] text-sm font-bold hover:bg-white transition-colors duration-300">
                 Explore Collection
               </button>

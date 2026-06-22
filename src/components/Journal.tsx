@@ -1,11 +1,17 @@
-// src/components/Journal.tsx
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
-const articles = [
-  { title: "The Art of Silk", date: "June 15, 2026", excerpt: "Exploring the delicate craftsmanship behind our signature evening wear." },
-  { title: "Summer Minimalism", date: "June 02, 2026", excerpt: "A guide to curating a timeless capsule wardrobe for the warmer months." },
+const featured = [
+  { title: "The Art of Silk", date: "June 15, 2026", excerpt: "Exploring the delicate craftsmanship behind our signature evening wear.", img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800" },
+  { title: "Summer Minimalism", date: "June 02, 2026", excerpt: "A guide to curating a timeless capsule wardrobe for the warmer months.", img: "https://images.unsplash.com/photo-1583394293214-28ded15ee548?q=80&w=800" },
+];
+
+const sidebar = [
+  { title: "Modern Horology", author: "Elena R." },
+  { title: "Leather Care 101", author: "Marcus T." },
+  { title: "The Quiet Luxury", author: "Sofia L." },
 ];
 
 export default function Journal() {
@@ -16,24 +22,34 @@ export default function Journal() {
           The Journal
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          {articles.map((article, index) => (
-            <motion.div 
-              key={index}
-              whileHover={{ opacity: 0.8 }}
-              className="group"
-            >
-              <div className="aspect-[16/9] bg-brand-green/5 mb-8" />
-              <span className="text-xs uppercase tracking-[0.2em] text-brand-green/50">
-                {article.date}
-              </span>
-              <h3 className="text-2xl text-brand-green my-3">{article.title}</h3>
-              <p className="text-brand-green/70 mb-6">{article.excerpt}</p>
-              <Link href="#" className="border-b border-brand-green pb-1 text-sm uppercase tracking-widest">
-                Read More
-              </Link>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+          {/* Main Articles */}
+          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {featured.map((post, i) => (
+              <motion.div key={i} whileHover={{ y: -5 }} className="group">
+                <div className="relative aspect-[4/3] bg-brand-green/5 mb-6 overflow-hidden">
+                  <Image src={post.img} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-brand-green/50">{post.date}</span>
+                <h3 className="text-xl text-brand-green my-2">{post.title}</h3>
+                <p className="text-brand-green/70 text-sm mb-4">{post.excerpt}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-8">
+            <h4 className="text-sm uppercase tracking-widest text-brand-green border-b border-brand-green/20 pb-4">Most Popular</h4>
+            {sidebar.map((item, i) => (
+              <div key={i} className="flex gap-4 items-center group cursor-pointer">
+                <div className="w-20 h-20 bg-brand-green/5 flex-shrink-0" />
+                <div>
+                  <h5 className="text-sm text-brand-green group-hover:underline">{item.title}</h5>
+                  <span className="text-[10px] text-brand-green/50 uppercase">{item.author}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

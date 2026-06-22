@@ -21,9 +21,9 @@ export default function Home() {
       
       <Trending />
       
-      <Testimonials />
-      
       <Journal />
+
+      <Testimonials />
       
       <CtaSection />
       
