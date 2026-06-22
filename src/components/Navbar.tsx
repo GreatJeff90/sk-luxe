@@ -7,16 +7,20 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold text-brand-green tracking-tighter">SK LUXE</Link>
         
+        {/* Desktop Navigation Links */}
         <div className="hidden md:flex gap-8 text-brand-green uppercase tracking-widest text-xs font-medium">
           <Link href="/shop" className="hover:text-brand-green/60 transition">Shop</Link>
-          <Link href="/blog" className="hover:text-brand-green/60 transition">Blog</Link>
+          <Link href="/blog" className="hover:text-brand-green/60 transition">Journal</Link>
           <Link href="/collections" className="hover:text-brand-green/60 transition">Collections</Link>
         </div>
 
-        <div className="flex items-center gap-6 text-brand-green">
-          <Link href="/login" className="text-xs uppercase tracking-widest hidden md:block">Login</Link>
-          <Search size={20} className="cursor-pointer" />
-          <ShoppingBag size={20} className="cursor-pointer" />
+        {/* Right side Actions */}
+        <div className="flex items-center gap-5 text-brand-green">
+          {/* Removed 'hidden md:block' to show Login on all screens */}
+          <Link href="/login" className="text-xs uppercase tracking-widest">Login</Link>
+          
+          <Search size={20} className="cursor-pointer hover:opacity-60 transition" />
+          <ShoppingBag size={20} className="cursor-pointer hover:opacity-60 transition" />
         </div>
       </div>
     </nav>
