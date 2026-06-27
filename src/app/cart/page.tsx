@@ -3,11 +3,10 @@ import { useCart } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
+import Link from "next/link"; // FIXED IMPORT
 
 export default function CartPage() {
   const { cart } = useCart();
-
-  // Calculate total price
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
@@ -23,7 +22,6 @@ export default function CartPage() {
           </div>
         ) : (
           <div className="space-y-8">
-            {/* Cart Items List */}
             {cart.map((item, index) => (
               <div key={index} className="flex gap-6 border-b border-brand-green/10 pb-8">
                 <div className="w-24 h-32 bg-brand-green/5 relative overflow-hidden">
@@ -37,15 +35,14 @@ export default function CartPage() {
               </div>
             ))}
 
-            {/* Total Section */}
             <div className="flex justify-between items-center pt-8">
               <span className="text-xl text-brand-green uppercase tracking-widest">Total</span>
               <span className="text-2xl text-brand-green font-bold">₦{total.toLocaleString()}</span>
             </div>
 
-            <button className="w-full py-4 bg-brand-green text-brand-cream uppercase tracking-widest font-bold hover:opacity-90 transition">
+            <Link href="/checkout" className="block w-full mt-8 py-4 bg-brand-green text-brand-cream uppercase tracking-widest font-bold text-center hover:opacity-90 transition">
               Checkout
-            </button>
+            </Link>
           </div>
         )}
       </div>

@@ -5,11 +5,13 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { products } from "@/data/products";
+import { useCart } from "@/context/CartContext";
 
 export default function ShopPage() {
   const [category, setCategory] = useState("All");
   const [size, setSize] = useState("All");
   const [maxPrice, setMaxPrice] = useState(100000);
+  const { addToCart } = useCart();
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
@@ -56,19 +58,33 @@ export default function ShopPage() {
         {/* Product Grid */}
         <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
           {filteredProducts.map((p) => (
-            <Link href={`/shop/${p.id}`} key={p.id} className="group">
-              <div className="aspect-[3/4] bg-brand-green/5 overflow-hidden mb-6 relative">
-                <Image 
-                  src={p.image} 
-                  alt={p.name} 
-                  fill 
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700" 
-                />
-              </div>
-              <h3 className="text-brand-green font-medium mb-1">{p.name}</h3>
-              <p className="text-brand-green/60 text-sm">₦{p.price.toLocaleString()}</p>
-            </Link>
+            <div key={p.id} className="group flex flex-col">
+              {/* Product link area */}
+              <Link href={`/shop/${p.id}`} className="flex-1">
+                <div className="aspect-[3/4] bg-brand-green/5 overflow-hidden mb-6 relative">
+                  <Image 
+                    src={p.image} 
+                    alt={p.name} 
+                    fill 
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                  />
+                </div>
+                <h3 className="text-brand-green font-medium mb-1">{p.name}</h3>
+                <p className="text-brand-green/60 text-sm mb-4">₦{p.price.toLocaleString()}</p>
+              </Link>
+              
+              {/* Separate Add to Cart button */}
+              <button 
+                onClick={(e) => {
+                  e.preventDefault(); // Prevents navigation when clicking button
+                  addToCart(p, p.sizes[0]);
+                }}
+                className="w-full py-3 border border-brand-green text-brand-green text-[10px] uppercase tracking-widest hover:bg-brand-green hover:text-brand-cream transition-colors duration-300"
+              >
+                Add to Cart
+              </button>
+            </div>
           ))}
         </div>
       </div>
