@@ -5,17 +5,17 @@ import Image from "next/image";
 
 const slides = [
   {
-    image: "/hero.jpg",
+    image: "/model1.jpeg",
     title: "Defined by Detail.",
     desc: "Timeless craft, modern soul.",
   },
   {
-    image: "/hero-2.jpg",
+    image: "/model2.jpeg",
     title: "Artisan Excellence.",
     desc: "Handcrafted quality designed for life.",
   },
   {
-    image: "/hero-3.jpg",
+    image: "/model3.jpeg",
     title: "Timeless Elegance.",
     desc: "Elevating your wardrobe staples.",
   },

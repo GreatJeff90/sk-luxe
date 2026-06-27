@@ -14,7 +14,7 @@ export default function LoginPage() {
       {/* Left side: Editorial Image */}
       <div className="hidden lg:block lg:w-1/2 relative">
         <Image 
-          src="/hero-2.jpg"
+          src="/model2.jpeg"
           alt="Luxury background"
           fill
           className="object-cover"

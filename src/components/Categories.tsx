@@ -2,22 +2,19 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { 
-  Watch, 
-  ShoppingBag, 
   Shirt, 
-  Gem, 
-  GlassWater, 
-  Briefcase, 
+  Waves, 
+  Wind, 
+  Tag, 
   ArrowRight 
 } from "lucide-react";
 
+// Updated to match the 4 main inventory categories
 const categories = [
-  { name: "Watches", icon: Watch },
-  { name: "Apparel", icon: Shirt },
-  { name: "Accessories", icon: ShoppingBag },
-  { name: "Jewelry", icon: Gem },
-  { name: "Fragrance", icon: GlassWater },
-  { name: "Leather", icon: Briefcase },
+  { name: "Tracksuits", icon: Shirt },
+  { name: "Apparel", icon: Tag },
+  { name: "Trousers", icon: Waves },
+  { name: "Jackets", icon: Wind },
 ];
 
 export default function Categories() {
@@ -34,9 +31,10 @@ export default function Categories() {
         <motion.div 
           className="flex gap-8"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+          transition={{ duration: 40, ease: "linear", repeat: Infinity }}
         >
-          {[...categories, ...categories].map((cat, index) => (
+          {/* Duplicating the array to ensure smooth infinite loop */}
+          {[...categories, ...categories, ...categories, ...categories].map((cat, index) => (
             <Link 
               href={`/shop/${cat.name.toLowerCase()}`} 
               key={index} 

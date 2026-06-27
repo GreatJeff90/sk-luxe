@@ -40,7 +40,7 @@ export default function CtaSection() {
           className="relative h-[400px] hidden lg:block"
         >
           <div className="absolute top-0 right-0 w-48 h-64 bg-brand-green/10 overflow-hidden shadow-lg">
-             <Image src="/hero-2.jpg" alt="Style" fill className="object-cover" />
+             <Image src="/model2.jpeg" alt="Style" fill className="object-cover" />
           </div>
           <div className="absolute bottom-0 left-20 w-40 h-40 bg-brand-green/20 overflow-hidden shadow-lg">
              <Image src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600" alt="Details" fill className="object-cover" />

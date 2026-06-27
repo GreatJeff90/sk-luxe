@@ -13,7 +13,7 @@ export default function RegisterPage() {
       {/* Left side: Editorial Image */}
       <div className="hidden lg:block lg:w-1/2 relative">
         <Image 
-          src="/hero.jpg"
+          src="/model1.jpeg"
           alt="Luxury registration"
           fill
           className="object-cover"
