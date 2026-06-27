@@ -1,11 +1,46 @@
 "use client";
+import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { usePaystackPayment } from "react-paystack";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function CheckoutPage() {
   const { cart } = useCart();
+  const router = useRouter();
   const total = cart.reduce((sum, item) => sum + item.price, 0);
+  
+  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [formData, setFormData] = useState({ name: "", address: "", phone: "", email: "" });
+
+  // Paystack configuration
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: formData.email || "customer@example.com",
+    amount: total * 100, // Paystack uses Kobo (Naira * 100)
+    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_KEY || 'pk_test_your_key_here',
+  };
+
+  const initializePayment = usePaystackPayment(config);
+
+  const handleCheckout = () => {
+    if (!formData.name || !formData.address || !formData.phone) {
+      alert("Please fill in all shipping details.");
+      return;
+    }
+
+    if (paymentMethod === "card") {
+      initializePayment({
+        onSuccess: () => router.push("/order-success"),
+        onClose: () => alert("Payment cancelled."),
+      });
+    } else {
+      // Logic for Bank Transfer
+      alert("Order placed! Please transfer ₦" + total.toLocaleString() + " to SK LUXE, Zenith Bank, 1234567890.");
+      router.push("/order-success");
+    }
+  };
 
   return (
     <main className="bg-brand-cream min-h-screen">
@@ -15,39 +50,35 @@ export default function CheckoutPage() {
         <h1 className="text-3xl text-brand-green uppercase tracking-widest font-light mb-12">Checkout</h1>
 
         <div className="grid md:grid-cols-2 gap-16">
-          {/* Shipping Form */}
           <section className="space-y-6">
             <h2 className="text-sm font-bold text-brand-green uppercase tracking-widest">Shipping Details</h2>
             <div className="space-y-4">
-              <input type="text" placeholder="Full Name" className="w-full p-3 bg-transparent border border-brand-green/20 focus:border-brand-green outline-none" />
-              <input type="text" placeholder="Delivery Address" className="w-full p-3 bg-transparent border border-brand-green/20 focus:border-brand-green outline-none" />
-              <input type="text" placeholder="Phone Number" className="w-full p-3 bg-transparent border border-brand-green/20 focus:border-brand-green outline-none" />
+              <input type="text" placeholder="Full Name" className="w-full p-3 bg-transparent border border-brand-green/20 outline-none" onChange={(e) => setFormData({...formData, name: e.target.value})} />
+              <input type="email" placeholder="Email" className="w-full p-3 bg-transparent border border-brand-green/20 outline-none" onChange={(e) => setFormData({...formData, email: e.target.value})} />
+              <input type="text" placeholder="Delivery Address" className="w-full p-3 bg-transparent border border-brand-green/20 outline-none" onChange={(e) => setFormData({...formData, address: e.target.value})} />
+              <input type="text" placeholder="Phone Number" className="w-full p-3 bg-transparent border border-brand-green/20 outline-none" onChange={(e) => setFormData({...formData, phone: e.target.value})} />
             </div>
           </section>
 
-          {/* Order Summary */}
-          <section className="bg-brand-green/5 p-8">
-            <h2 className="text-sm font-bold text-brand-green uppercase tracking-widest mb-6">Order Summary</h2>
-            <div className="space-y-4 mb-8">
-              {cart.map((item, index) => (
-                <div key={index} className="flex justify-between text-sm text-brand-green/80">
-                  <span>{item.name} (x1)</span>
-                  <span>₦{item.price.toLocaleString()}</span>
-                </div>
-              ))}
-            </div>
-            <div className="border-t border-brand-green/20 pt-4 flex justify-between font-bold text-brand-green">
-              <span>Total</span>
-              <span>₦{total.toLocaleString()}</span>
+          <section className="bg-brand-green/5 p-8 h-fit">
+            <h2 className="text-sm font-bold text-brand-green uppercase tracking-widest mb-6">Payment Method</h2>
+            <div className="space-y-3 mb-8">
+              <label className="flex items-center gap-3 p-4 border border-brand-green/20 cursor-pointer">
+                <input type="radio" name="payment" value="card" checked={paymentMethod === 'card'} onChange={(e) => setPaymentMethod(e.target.value)} />
+                <span className="text-sm text-brand-green">Pay with Card</span>
+              </label>
+              <label className="flex items-center gap-3 p-4 border border-brand-green/20 cursor-pointer">
+                <input type="radio" name="payment" value="transfer" checked={paymentMethod === 'transfer'} onChange={(e) => setPaymentMethod(e.target.value)} />
+                <span className="text-sm text-brand-green">Bank Transfer</span>
+              </label>
             </div>
             
-            <button className="w-full mt-8 py-4 bg-brand-green text-brand-cream uppercase tracking-widest font-bold hover:opacity-90 transition">
-              Complete Order
+            <button onClick={handleCheckout} className="w-full py-4 bg-brand-green text-brand-cream uppercase tracking-widest font-bold hover:opacity-90 transition">
+              {paymentMethod === 'card' ? 'Pay Now' : 'Place Order'}
             </button>
           </section>
         </div>
       </div>
-
       <Footer />
     </main>
   );
