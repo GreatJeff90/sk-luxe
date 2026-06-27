@@ -1,12 +1,33 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
-const CartContext = createContext<any>(null);
+// Define the structure of your product
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  image: string;
+  price: number;
+  sizes: string[];
+}
 
-export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [cart, setCart] = useState<any[]>([]);
+// Define the structure of items in the cart
+interface CartItem extends Product {
+  selectedSize: string;
+}
 
-  const addToCart = (product: any, size: string) => {
+// Define the Context shape
+interface CartContextType {
+  cart: CartItem[];
+  addToCart: (product: Product, size: string) => void;
+}
+
+const CartContext = createContext<CartContextType | null>(null);
+
+export function CartProvider({ children }: { children: ReactNode }) {
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  const addToCart = (product: Product, size: string) => {
     setCart((prev) => [...prev, { ...product, selectedSize: size }]);
   };
 
@@ -17,4 +38,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const useCart = () => useContext(CartContext);
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
+};
