@@ -43,3 +43,4 @@ export default function ProfileSidebar({ activeTab, setActiveTab, onLogout }: Si
     </aside>
   );
 }
+
