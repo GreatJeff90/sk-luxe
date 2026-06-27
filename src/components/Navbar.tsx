@@ -3,12 +3,29 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ShoppingBag, Search, User } from 'lucide-react';
 import { useCart } from "@/context/CartContext";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { supabase } from "@/lib/supabaseClient"; // Import your supabase client
 
 export default function Navbar() {
   const { cart } = useCart();
-  // Replace this with your actual auth logic (e.g., from a context or session)
-  const [isLoggedIn] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check initial session
+    const checkUser = async () => {
+      const { data } = await supabase.auth.getSession();
+      setIsLoggedIn(!!data.session);
+    };
+    
+    checkUser();
+
+    // Listen for auth changes (login/logout)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setIsLoggedIn(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <nav className="sticky top-0 z-50 bg-brand-cream/90 backdrop-blur-md border-b border-brand-green/20">
@@ -41,7 +58,7 @@ export default function Navbar() {
               <User size={20} className="hover:opacity-60 transition" />
             </Link>
           ) : (
-            <Link href="/login" className="text-xs uppercase tracking-widest">Login</Link>
+            <Link href="/login" className="text-xs uppercase tracking-widest hover:text-brand-green/60 transition">Login</Link>
           )}
           
           <Search size={20} className="cursor-pointer hover:opacity-60 transition" />

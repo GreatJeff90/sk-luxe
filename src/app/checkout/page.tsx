@@ -3,8 +3,16 @@ import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { usePaystackPayment } from "react-paystack";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient"; // Import missing supabase
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+// Define a type for your cart items
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+}
 
 export default function CheckoutPage() {
   const { cart } = useCart();
@@ -14,15 +22,32 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [formData, setFormData] = useState({ name: "", address: "", phone: "", email: "" });
 
-  // Paystack configuration
   const config = {
     reference: new Date().getTime().toString(),
     email: formData.email || "customer@example.com",
-    amount: total * 100, // Paystack uses Kobo (Naira * 100)
+    amount: total * 100,
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_KEY || 'pk_test_your_key_here',
   };
 
   const initializePayment = usePaystackPayment(config);
+
+  const saveOrderToDatabase = async (cartItems: CartItem[], totalAmount: number, userId: string) => {
+    const { error } = await supabase
+      .from("orders")
+      .insert([
+        { 
+          user_id: userId, 
+          total_amount: totalAmount, 
+          items: cartItems 
+        }
+      ]);
+
+    if (error) {
+      console.error("Error saving order:", error.message);
+    } else {
+      console.log("Order saved successfully!");
+    }
+  };
 
   const handleCheckout = () => {
     if (!formData.name || !formData.address || !formData.phone) {
@@ -32,11 +57,16 @@ export default function CheckoutPage() {
 
     if (paymentMethod === "card") {
       initializePayment({
-        onSuccess: () => router.push("/order-success"),
-        onClose: () => alert("Payment cancelled."),
+        onSuccess: async () => {
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user) {
+            await saveOrderToDatabase(cart as CartItem[], total, user.id);
+          }
+          router.push("/order-success");
+        },
+        onClose: () => console.log("Payment cancelled."),
       });
     } else {
-      // Logic for Bank Transfer
       alert("Order placed! Please transfer ₦" + total.toLocaleString() + " to SK LUXE, Zenith Bank, 1234567890.");
       router.push("/order-success");
     }
