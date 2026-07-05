@@ -3,7 +3,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { AiOutlineGoogle } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -12,93 +11,92 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState<{ text: string; isError: boolean } | null>(null);
   
-  const { signIn, signInWithGoogle } = useAuth();
+  const { signIn } = useAuth();
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage(null);
-
     const { error } = await signIn(email, password);
-    
     if (error) {
       setMessage({ text: error.message, isError: true });
     } else {
-      setMessage({ text: "Login successful! Redirecting...", isError: false });
-      setTimeout(() => router.push("/"), 1500);
+      router.push("/");
     }
   };
 
   return (
-    <div className="min-h-screen flex bg-brand-cream">
-      {/* Left side: Editorial Image */}
-      <div className="hidden lg:block lg:w-1/2 relative">
-        <Image src="/model2.jpeg" alt="Luxury background" fill className="object-cover" />
-        <div className="absolute inset-0 bg-brand-green/20" />
-      </div>
-
-      {/* Right side: Sign In Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-12">
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="w-full max-w-sm">
-          <div className="text-left mb-12">
-            <h1 className="text-4xl text-brand-green font-serif mb-2">Sign In</h1>
-            <p className="text-brand-green/60 text-xs uppercase tracking-[0.2em]">Enter your details below</p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        className="w-full max-w-sm bg-white p-8 rounded-3xl border border-gray-100 shadow-sm"
+      >
+        {/* Header Section */}
+        <div className="text-center mb-8">
+          <div className="relative w-24 h-12 mx-auto mb-4">
+             <Image 
+                src="/logo-1.png" 
+                alt="Brand Logo" 
+                fill 
+                className="object-contain" 
+                priority
+             />
           </div>
+          <h2 className="text-xl font-medium text-black">Welcome Back</h2>
+          <p className="text-gray-500 text-sm mt-2">Sign in to continue shopping</p>
+        </div>
 
-          {/* Feedback Message */}
-          {message && (
-            <p className={`mb-6 text-xs font-bold ${message.isError ? "text-red-600" : "text-green-700"}`}>
-              {message.text}
-            </p>
-          )}
+        {/* Feedback Message */}
+        {message && (
+          <p className={`mb-4 text-xs ${message.isError ? "text-red-500" : "text-green-500"}`}>
+            {message.text}
+          </p>
+        )}
 
-          <form onSubmit={handleLogin} className="space-y-6">
+        {/* Form Section */}
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-black uppercase">Email Address</label>
             <input
               type="email"
-              placeholder="Email address"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-transparent border-b border-brand-green/20 py-3 text-brand-green outline-none focus:border-brand-green transition-colors"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-black transition-colors"
             />
-            
-            <div className="space-y-1">
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-transparent border-b border-brand-green/20 py-3 text-brand-green outline-none focus:border-brand-green transition-colors"
-              />
-              <div className="text-right">
-                <Link href="/forgot-password" className="text-[10px] uppercase tracking-widest text-brand-green/50 hover:text-brand-green transition-colors">
-                  Forgot Password?
-                </Link>
-              </div>
-            </div>
-            
-            <button type="submit" className="w-full bg-brand-green text-brand-cream py-4 uppercase tracking-widest text-xs font-bold hover:opacity-90 transition-opacity">
-              Sign In
-            </button>
-          </form>
-
-          <div className="my-8 flex items-center gap-4 text-xs text-brand-green/40 uppercase tracking-widest">
-            <div className="flex-1 h-px bg-brand-green/20" /> Or continue with <div className="flex-1 h-px bg-brand-green/20" />
+          </div>
+          
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-black uppercase">Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-black transition-colors"
+            />
           </div>
 
-          <button 
-            type="button"
-            onClick={() => signInWithGoogle()}
-            className="w-full flex items-center justify-center gap-3 border border-brand-green/20 py-4 text-brand-green uppercase tracking-widest text-xs font-bold hover:bg-brand-green/5 transition-colors"
-          >
-            <AiOutlineGoogle size={18} /> Google
+          <div className="text-right">
+            <Link href="/forgot-password" className="text-[11px] text-gray-500 hover:text-black">
+              Forgot Password?
+            </Link>
+          </div>
+          
+          <button type="submit" className="w-full bg-black text-white rounded-xl py-3 text-sm font-medium hover:bg-gray-800 transition-colors">
+            Sign In
           </button>
+        </form>
 
-          <p className="mt-8 text-center text-xs text-brand-green/60">
-            Don&apos;t have an account?{" "}
-            <Link href="/register" className="border-b border-brand-green">Create one</Link>
-          </p>
-        </motion.div>
-      </div>
+        {/* Register Redirect */}
+        <p className="mt-6 text-center text-xs text-gray-500">
+          Don&apos;t have an account?{" "}
+          <Link href="/register" className="font-semibold text-black hover:underline">
+            Create an account
+          </Link>
+        </p>
+      </motion.div>
     </div>
   );
 }
