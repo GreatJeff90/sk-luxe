@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { CartProvider } from "@/context/CartContext"; // 1. Import the provider
-import "./globals.css"; // Ensure your globals are imported
+import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
+import "./globals.css"; 
 
 export const metadata: Metadata = {
   title: "SK LUXE",
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <CartProvider> {/* 2. Wrap your entire application */}
-          {children}
+          <WishlistProvider> {/* Add this wrapper */}
+            {children}
+          </WishlistProvider>
         </CartProvider>
       </body>
     </html>

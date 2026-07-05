@@ -1,11 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { products } from "@/data/products"; // Importing your central data source
+import { Heart, ShoppingCart } from "lucide-react";
+import { products } from "@/data/products";
+import { useWishlist } from "@/context/WishlistContext";
+import { useCart } from "@/context/CartContext";
 
 export default function NewArrivals() {
-  // Taking the first 3 products from your central data file
   const displayProducts = products.slice(0, 9);
+  const { addToWishlist } = useWishlist();
+  const { addToCart } = useCart();
 
   return (
     <section className="relative py-24">
@@ -49,6 +53,24 @@ export default function NewArrivals() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                
+                {/* Action Buttons Overlay */}
+                <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button 
+                    onClick={() => addToWishlist(product)}
+                    className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-black transition"
+                    title="Add to Wishlist"
+                  >
+                    <Heart size={18} />
+                  </button>
+                  <button 
+                    onClick={() => addToCart(product, "Default")} // Pass the second argument here
+                    className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 text-black transition"
+                    title="Add to Cart"
+                  >
+                    <ShoppingCart size={18} />
+                  </button>
+                </div>
               </div>
               
               <div className="space-y-1">
