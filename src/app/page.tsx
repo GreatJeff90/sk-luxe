@@ -25,7 +25,7 @@ export default function Home() {
 
       {/* <Testimonials /> */}
       
-      <CtaSection />
+      {/* <CtaSection /> */}
       
       <Footer />
     </main>
