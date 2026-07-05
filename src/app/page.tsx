@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
+// import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
 import NewArrivals from "@/components/NewArrivals";
 import Trending from "@/components/Trending";
@@ -13,17 +13,17 @@ export default function Home() {
     <main className="min-h-screen bg-brand-cream">
       <Navbar />
       
-      <Hero />
+      {/* <Hero /> */}
       
       <Categories />
       
       <NewArrivals />
       
-      <Trending />
+      {/* <Trending /> */}
       
-      <Journal />
+      {/* <Journal /> */}
 
-      <Testimonials />
+      {/* <Testimonials /> */}
       
       <CtaSection />
       
