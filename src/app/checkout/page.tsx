@@ -17,6 +17,8 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
 
   const handleCompleteOrder = async () => {
+    if (loading) return;
+    
     if (!formData.name || !formData.address || !formData.phone) {
       alert("Please fill in your name, delivery address, and phone number.");
       return;
@@ -25,13 +27,14 @@ export default function CheckoutPage() {
     setLoading(true);
 
     try {
-      // 1. Get current user
-      const { data: { user } } = await supabase.auth.getUser();
+      // 1. Get the current user session
+      const { data: { session } } = await supabase.auth.getSession();
 
       // 2. Save order to Supabase
+      // NOTE: We do NOT include 'id' here, allowing Supabase to use gen_random_uuid()
       const { error } = await supabase.from("orders").insert([
         {
-          user_id: user?.id || null,
+          user_id: session?.user.id || null, 
           total_amount: total,
           items: cart,
           full_name: formData.name,
@@ -64,7 +67,6 @@ Please provide waybill details.`;
       const whatsappUrl = `https://wa.link/kyd4p7?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank");
     } catch (err: unknown) {
-      // Correctly handle error as unknown type
       const message = err instanceof Error ? err.message : "Something went wrong.";
       console.error("Checkout Error:", err);
       alert(`Something went wrong: ${message}`);
@@ -79,7 +81,6 @@ Please provide waybill details.`;
         <h1 className="text-3xl text-black uppercase tracking-widest font-light mb-12">Checkout</h1>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Shipping Form */}
           <section className="space-y-6">
             <h2 className="text-xs font-bold text-black uppercase tracking-widest">Shipping Details</h2>
             <div className="space-y-4">
@@ -87,33 +88,36 @@ Please provide waybill details.`;
                 type="text" 
                 placeholder="Full Name" 
                 required
+                disabled={loading}
                 onChange={(e) => setFormData({...formData, name: e.target.value})} 
-                className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none transition" 
+                className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none transition disabled:opacity-60" 
               />
               <input 
                 type="text" 
                 placeholder="Delivery Address" 
                 required
+                disabled={loading}
                 onChange={(e) => setFormData({...formData, address: e.target.value})} 
-                className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none transition" 
+                className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none transition disabled:opacity-60" 
               />
               <input 
                 type="text" 
                 placeholder="Nearest Landmark" 
+                disabled={loading}
                 onChange={(e) => setFormData({...formData, landmark: e.target.value})} 
-                className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none transition" 
+                className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none transition disabled:opacity-60" 
               />
               <input 
                 type="text" 
                 placeholder="Phone Number (for Waybill)" 
                 required
+                disabled={loading}
                 onChange={(e) => setFormData({...formData, phone: e.target.value})} 
-                className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none transition" 
+                className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none transition disabled:opacity-60" 
               />
             </div>
           </section>
 
-          {/* Order Summary */}
           <section className="bg-black text-white p-8 rounded-3xl">
             <h2 className="text-xs font-bold uppercase tracking-widest mb-6 text-gray-400">Order Summary</h2>
             <div className="space-y-4 mb-8">
@@ -132,7 +136,7 @@ Please provide waybill details.`;
             <button 
               onClick={handleCompleteOrder}
               disabled={loading}
-              className="w-full mt-8 py-4 bg-white text-black uppercase tracking-widest font-bold rounded-xl hover:bg-gray-200 transition disabled:opacity-50"
+              className="w-full mt-8 py-4 bg-white text-black uppercase tracking-widest font-bold rounded-xl hover:bg-gray-200 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Processing..." : "Complete Order via WhatsApp"}
             </button>
