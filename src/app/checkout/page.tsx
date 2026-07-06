@@ -31,7 +31,7 @@ export default function CheckoutPage() {
       // 2. Save order to Supabase
       const { error } = await supabase.from("orders").insert([
         {
-          user_id: user?.id,
+          user_id: user?.id || null,
           total_amount: total,
           items: cart,
           full_name: formData.name,
@@ -41,7 +41,10 @@ export default function CheckoutPage() {
         },
       ]);
 
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase Insertion Error:", error);
+        throw new Error(error.message);
+      }
 
       // 3. Construct WhatsApp message
       const orderDetails = cart.map(item => `${item.name} (Size: ${item.selectedSize})`).join(", ");
@@ -60,9 +63,11 @@ Please provide waybill details.`;
 
       const whatsappUrl = `https://wa.link/kyd4p7?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank");
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong. Please try again.");
+    } catch (err: unknown) {
+      // Correctly handle error as unknown type
+      const message = err instanceof Error ? err.message : "Something went wrong.";
+      console.error("Checkout Error:", err);
+      alert(`Something went wrong: ${message}`);
     } finally {
       setLoading(false);
     }
