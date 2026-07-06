@@ -33,7 +33,7 @@ export default function Navbar() {
           
           <Link href="/" className="flex items-center">
             {/* Using brightness/invert to make the logo white for the black nav */}
-            <Image src="/logo-1.png" alt="Silent King Logo" width={60} height={40} className="object-contain brightness-0 invert" />
+            <Image src="/logo-.png" alt="Silent King Logo" width={80} height={40} className="object-contain brightness-0 invert" />
           </Link>
 
           {/* Desktop Links: Removed Home & Shop */}

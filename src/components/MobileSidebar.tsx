@@ -28,7 +28,7 @@ export default function MobileSidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar Panel */}
       <div className={`fixed top-0 left-0 h-full w-[80%] max-w-sm bg-white z-[101] transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-6 flex justify-between items-center border-b">
-          <Image src="/logo-1.png" alt="Silent King Logo" width={40} height={40} className="object-contain" />
+          <Image src="/logo-.png" alt="Silent King Logo" width={80} height={40} className="object-contain" />
           <button onClick={onClose}><X size={24} /></button>
         </div>
         

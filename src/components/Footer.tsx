@@ -12,7 +12,7 @@ export default function Footer() {
         {/* Brand Section */}
         <div className="space-y-4">
           <Link href="/" className="inline-block">
-            <Image src="/logo-1.png" alt="SK LUXE" width={100} height={40} className="brightness-0 invert" />
+            <Image src="/logo-.png" alt="SK LUXE" width={100} height={40} className="brightness-0 invert" />
           </Link>
           <div className="flex space-x-6 pt-4">
             <FiInstagram className="cursor-pointer hover:text-gray-400 transition-colors" size={20} />

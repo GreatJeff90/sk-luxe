@@ -46,7 +46,7 @@ export default function RegisterPage() {
         {/* Header Section */}
         <div className="text-center mb-8">
           <div className="relative w-24 h-12 mx-auto mb-4">
-             <Image src="/logo-1.png" alt="Brand Logo" fill className="object-contain" priority />
+             <Image src="/logo-.png" alt="Brand Logo" fill className="object-contain" priority />
           </div>
           <h2 className="text-xl font-medium text-black">Create Account</h2>
           <p className="text-gray-500 text-sm mt-2">Sign up to get started</p>
