@@ -43,7 +43,8 @@ export default function ShopDisplay() {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Changed grid-cols-1 to grid-cols-2 for mobile, kept md:grid-cols-3 for desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
           {filteredProducts.map((product) => {
             const inWishlist = isWishlisted(product.id);
             return (
@@ -51,38 +52,38 @@ export default function ShopDisplay() {
                 key={product.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="bg-white p-4 group border border-gray-50 flex flex-col"
+                className="bg-white p-2 md:p-4 group border border-gray-50 flex flex-col"
               >
-                {/* Wrapped in Link for dynamic product pages */}
+                {/* Image Section */}
                 <Link href={`/shop/${product.id}`} className="block">
-                  <div className="aspect-[4/5] bg-gray-100 mb-6 overflow-hidden relative">
+                  <div className="aspect-[4/5] bg-gray-100 mb-4 overflow-hidden relative">
                     <Image 
                       src={product.image}
                       alt={product.name}
                       fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="(max-width: 768px) 50vw, 33vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <div className="space-y-1 mb-4">
-                    <h3 className="text-sm uppercase tracking-widest font-medium text-black">{product.name}</h3>
-                    <p className="text-sm font-bold text-black">₦{product.price.toLocaleString()}</p>
+                  <div className="space-y-0.5 mb-4">
+                    <h3 className="text-[10px] md:text-sm uppercase tracking-widest font-medium text-black truncate">{product.name}</h3>
+                    <p className="text-[10px] md:text-sm font-bold text-black">₦{product.price.toLocaleString()}</p>
                   </div>
                 </Link>
                 
-                {/* Actions outside of Link to prevent navigation when clicking buttons */}
-                <div className="flex gap-2 mt-auto">
+                {/* Action Buttons */}
+                <div className="flex gap-1 mt-auto">
                     <button 
                       onClick={(e) => { e.preventDefault(); inWishlist ? removeFromWishlist(product.id) : addToWishlist(product); }}
                       className={`p-2 flex-1 border rounded-lg transition ${inWishlist ? "border-red-500 text-red-500" : "border-gray-200 text-black hover:bg-gray-50"}`}
                     >
-                      <Heart size={18} fill={inWishlist ? "currentColor" : "none"} className="mx-auto" />
+                      <Heart size={16} fill={inWishlist ? "currentColor" : "none"} className="mx-auto" />
                     </button>
                     <button 
                       onClick={(e) => { e.preventDefault(); addToCart({ ...product, id: Number(product.id) }, "Default"); }}
-                      className="p-2 flex-[2] bg-black text-white rounded-lg hover:bg-gray-800 transition text-xs uppercase"
+                      className="p-2 flex-[2] bg-black text-white rounded-lg hover:bg-gray-800 transition text-[10px] md:text-xs uppercase"
                     >
-                      Add to Cart
+                      Add
                     </button>
                 </div>
               </motion.div>
