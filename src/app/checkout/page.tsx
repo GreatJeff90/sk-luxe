@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function CheckoutPage() {
   const { cart } = useCart();
@@ -13,16 +14,38 @@ export default function CheckoutPage() {
     phone: "",
   });
 
-  const handleCompleteOrder = () => {
-    // Basic validation
+  const [loading, setLoading] = useState(false);
+
+  const handleCompleteOrder = async () => {
     if (!formData.name || !formData.address || !formData.phone) {
       alert("Please fill in your name, delivery address, and phone number.");
       return;
     }
 
-    // Construct WhatsApp message
-    const orderDetails = cart.map(item => `${item.name} (Size: ${item.selectedSize})`).join(", ");
-    const message = `Hi! I'm placing an order from SK LUXE.
+    setLoading(true);
+
+    try {
+      // 1. Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+
+      // 2. Save order to Supabase
+      const { error } = await supabase.from("orders").insert([
+        {
+          user_id: user?.id,
+          total_amount: total,
+          items: cart,
+          full_name: formData.name,
+          address: formData.address,
+          phone: formData.phone,
+          status: "pending",
+        },
+      ]);
+
+      if (error) throw error;
+
+      // 3. Construct WhatsApp message
+      const orderDetails = cart.map(item => `${item.name} (Size: ${item.selectedSize})`).join(", ");
+      const message = `Hi! I'm placing an order from SK LUXE.
 
 Order Items: ${orderDetails}
 Total Amount: ₦${total.toLocaleString()}
@@ -35,8 +58,14 @@ Phone: ${formData.phone}
 
 Please provide waybill details.`;
 
-    const whatsappUrl = `https://wa.link/kyd4p7?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
+      const whatsappUrl = `https://wa.link/kyd4p7?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,9 +106,6 @@ Please provide waybill details.`;
                 className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:border-black outline-none transition" 
               />
             </div>
-            <p className="text-[10px] text-gray-400 italic">
-              * Note: Delivery fees are calculated manually based on your location and package weight. Our team will contact you on WhatsApp to finalize shipping.
-            </p>
           </section>
 
           {/* Order Summary */}
@@ -100,12 +126,13 @@ Please provide waybill details.`;
             
             <button 
               onClick={handleCompleteOrder}
-              className="w-full mt-8 py-4 bg-white text-black uppercase tracking-widest font-bold rounded-xl hover:bg-gray-200 transition"
+              disabled={loading}
+              className="w-full mt-8 py-4 bg-white text-black uppercase tracking-widest font-bold rounded-xl hover:bg-gray-200 transition disabled:opacity-50"
             >
-              Complete Order via WhatsApp
+              {loading ? "Processing..." : "Complete Order via WhatsApp"}
             </button>
             <p className="text-[10px] text-center mt-4 text-gray-500">
-              Clicking &quot;Complete Order&quot; will open WhatsApp to confirm your shipping details and receive waybill information.
+              Clicking &quot;Complete Order&quot; will save your order to our records and open WhatsApp.
             </p>
           </section>
         </div>

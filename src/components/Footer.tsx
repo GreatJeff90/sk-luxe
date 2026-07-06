@@ -36,8 +36,8 @@ export default function Footer() {
         <div>
           <h4 className="font-medium mb-4 uppercase text-xs tracking-widest text-gray-400">Contact</h4>
           <ul className="space-y-3 text-sm">
-            <li>Email: support@skluxe.com</li>
-            <li>Phone: +234 800 000 0000</li>
+            <li>Email: support@sk-luxe.com</li>
+            <li>Phone: +234 812 372 0849</li>
           </ul>
         </div>
       </div>

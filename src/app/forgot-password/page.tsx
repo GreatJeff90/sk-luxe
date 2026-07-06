@@ -2,58 +2,66 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+import { supabase } from "@/lib/supabaseClient"; // Import your Supabase client
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    // Supabase trigger to send the reset email
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/update-password`, // This page needs to be created
+    });
+
+    if (error) {
+      setMessage("Error: " + error.message);
+    } else {
+      setMessage("Check your email for the reset link!");
+    }
+    setLoading(false);
+  };
 
   return (
-    <div className="min-h-screen flex bg-brand-cream">
-      {/* Left side: Editorial Image */}
-      <div className="hidden lg:block lg:w-1/2 relative">
-        <Image 
-          src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1200"
-          alt="Password recovery"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-brand-green/20" />
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-md bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-100"
+      >
+        <h1 className="text-2xl text-black font-bold mb-6 uppercase tracking-widest text-center">Reset Password</h1>
+        
+        <form onSubmit={handleReset} className="space-y-6">
+          <input
+            type="email"
+            placeholder="Email address"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-4 bg-gray-50 border border-gray-100 rounded-xl focus:border-black outline-none transition"
+          />
+          
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="w-full bg-black text-white py-4 uppercase tracking-widest text-xs font-bold rounded-xl hover:bg-gray-800 transition disabled:opacity-50"
+          >
+            {loading ? "Sending..." : "Send Reset Link"}
+          </button>
+        </form>
 
-      {/* Right side: Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-12">
-        <motion.div 
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="w-full max-w-sm"
-        >
-          <div className="text-left mb-12">
-            <h1 className="text-4xl text-brand-green font-serif mb-2">Reset Password</h1>
-            <p className="text-brand-green/60 text-xs uppercase tracking-[0.2em]">
-              Enter your email to receive instructions
-            </p>
-          </div>
+        {message && <p className="mt-4 text-center text-xs text-black">{message}</p>}
 
-          <form className="space-y-6">
-            <input
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-transparent border-b border-brand-green/20 py-3 text-brand-green outline-none focus:border-brand-green transition-colors"
-            />
-            
-            <button type="submit" className="w-full bg-brand-green text-brand-cream py-4 uppercase tracking-widest text-xs font-bold hover:opacity-90 transition-opacity">
-              Send Reset Link
-            </button>
-          </form>
-
-          <p className="mt-8 text-center text-xs text-brand-green/60">
-            Remembered your password?{" "}
-            <Link href="/login" className="border-b border-brand-green">Sign in</Link>
-          </p>
-        </motion.div>
-      </div>
+        <p className="mt-8 text-center text-xs text-gray-500">
+          Remembered your password?{" "}
+          <Link href="/login" className="text-black font-bold underline underline-offset-4">Sign in</Link>
+        </p>
+      </motion.div>
     </div>
   );
 }

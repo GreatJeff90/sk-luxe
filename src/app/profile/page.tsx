@@ -2,26 +2,45 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
-import { User } from "@supabase/supabase-js"; // Import the specific type
+import { User } from "@supabase/supabase-js";
+
+// Define the Order type based on your Supabase table schema
+interface Order {
+  id: string;
+  status: string;
+  total_amount: number;
+  created_at: string;
+}
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
   const [address, setAddress] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const router = useRouter()
-
-  // Mock data for "Live Orders" - In a real app, fetch this from Supabase
-  const liveOrders = [
-    { id: "SK-9921", status: "In Transit", total: "₦50,000" },
-  ];
+  
+  // Use the Order type here instead of 'any[]'
+  const [orders, setOrders] = useState<Order[]>([]); 
+  const router = useRouter();
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const init = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) router.push("/login");
-      else setUser(session.user);
+      if (!session) {
+        router.push("/login");
+        return;
+      }
+      
+      setUser(session.user);
+
+      // Fetch Orders
+      const { data: fetchedOrders } = await supabase
+        .from("orders")
+        .select("id, status, total_amount, created_at") // Explicitly select fields
+        .eq("user_id", session.user.id)
+        .order("created_at", { ascending: false });
+
+      if (fetchedOrders) setOrders(fetchedOrders);
     };
-    fetchUser();
+    init();
   }, [router]);
 
   if (!user) return <div className="py-20 text-center">Loading...</div>;
@@ -32,7 +51,7 @@ export default function ProfilePage() {
         <h1 className="text-3xl text-black uppercase tracking-widest font-light mb-12">My Account</h1>
 
         <div className="grid md:grid-cols-3 gap-12">
-          {/* Account Info */}
+          {/* Account Info Section */}
           <section className="md:col-span-1 space-y-6">
             <h2 className="text-xs font-bold uppercase tracking-widest">Account Details</h2>
             <div className="bg-gray-50 p-6 rounded-2xl">
@@ -40,7 +59,6 @@ export default function ProfilePage() {
               <p className="font-medium text-black">{user.email}</p>
             </div>
             
-            {/* Address Management */}
             <div className="space-y-4">
               <h2 className="text-xs font-bold uppercase tracking-widest">Shipping Address</h2>
               {isEditing ? (
@@ -62,28 +80,27 @@ export default function ProfilePage() {
             </div>
           </section>
 
-          {/* Live Orders */}
+          {/* Orders Section */}
           <section className="md:col-span-2 space-y-6">
-            <h2 className="text-xs font-bold uppercase tracking-widest">Live Orders</h2>
-            {liveOrders.length > 0 ? (
+            <h2 className="text-xs font-bold uppercase tracking-widest">Your Orders</h2>
+            {orders.length > 0 ? (
               <div className="space-y-4">
-                {liveOrders.map((order) => (
+                {orders.map((order) => (
                   <div key={order.id} className="border border-gray-100 p-6 rounded-2xl flex justify-between items-center">
                     <div>
-                      <p className="font-bold">Order {order.id}</p>
-                      <p className="text-xs text-gray-500">Status: {order.status}</p>
+                      <p className="font-bold text-sm">Order ID: {order.id.slice(0, 8)}...</p>
+                      <p className="text-xs text-gray-500">Status: {order.status || "Pending"}</p>
                     </div>
-                    <p className="font-bold">{order.total}</p>
+                    <p className="font-bold text-sm">₦{order.total_amount.toLocaleString()}</p>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-gray-400 italic">No active orders at the moment.</p>
+              <p className="text-sm text-gray-400 italic">No orders found.</p>
             )}
           </section>
         </div>
         
-        {/* Logout */}
         <button 
           onClick={async () => { await supabase.auth.signOut(); router.push("/"); }}
           className="mt-16 text-xs text-gray-400 hover:text-red-600 transition"
