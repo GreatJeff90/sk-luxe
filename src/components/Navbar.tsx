@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingBag, Search, User, Home, Heart, List, Menu } from 'lucide-react';
+import { ShoppingBag, Search, User, Home, Heart, List, Menu, X } from 'lucide-react';
 import { useCart } from "@/context/CartContext";
 import { useState, useEffect } from 'react';
 import { supabase } from "../lib/supabaseClient";
@@ -11,6 +11,8 @@ export default function Navbar() {
   const { cart } = useCart();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const checkUser = async () => {
@@ -22,12 +24,36 @@ export default function Navbar() {
     return () => subscription.unsubscribe();
   }, []);
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
+      setIsSearchOpen(false);
+    }
+  };
+
   return (
     <>
-      <MobileSidebar 
-        isOpen={isSidebarOpen} 
-        onClose={() => setIsSidebarOpen(false)} 
-      />
+      <MobileSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+      {/* SEARCH OVERLAY */}
+      {isSearchOpen && (
+        <div className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center p-6">
+          <button onClick={() => setIsSearchOpen(false)} className="absolute top-8 right-8 text-black">
+            <X size={32} />
+          </button>
+          <form onSubmit={handleSearch} className="w-full max-w-lg">
+            <input 
+              autoFocus
+              type="text"
+              placeholder="Search products..."
+              className="w-full text-4xl border-b-2 border-black outline-none pb-4"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </form>
+        </div>
+      )}
 
       {/* TOP NAV */}
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 p-4">
@@ -41,13 +67,13 @@ export default function Navbar() {
           <div className="hidden md:flex gap-8 text-xs font-medium uppercase tracking-widest text-gray-600">
             <Link href="/" className="hover:text-black">Home</Link>
             <Link href="/shop" className="hover:text-black">Shop</Link>
-            <Link href="/collections" className="hover:text-black">Collections</Link>
+            <Link href="/shop" className="hover:text-black">Collections</Link>
             <Link href="/wishlist" className="hover:text-black">Wishlist</Link>
             <Link href="/profile" className="hover:text-black">Profile</Link>
           </div>
 
           <div className="flex items-center gap-4">
-            <Search size={20} className="cursor-pointer" />
+            <Search size={20} className="cursor-pointer" onClick={() => setIsSearchOpen(true)} />
             <Link href="/cart" className="relative">
               <ShoppingBag size={20} />
               {cart.length > 0 && (
@@ -63,7 +89,7 @@ export default function Navbar() {
       {/* MOBILE BOTTOM NAV */}
       <div className="md:hidden fixed bottom-4 left-4 right-4 z-50 bg-white border border-gray-200 rounded-full shadow-lg px-6 py-3 flex items-center justify-between">
         <Link href="/" className="flex flex-col items-center text-xs"><Home size={20} /> Home</Link>
-        <Link href="/categories" className="flex flex-col items-center text-xs"><List size={20} /> Categories</Link>
+        <Link href="/shop" className="flex flex-col items-center text-xs"><List size={20} /> Categories</Link>
         <Link href="/cart" className="bg-black text-white p-4 rounded-full -mt-10 shadow-xl border-4 border-white">
           <ShoppingBag size={24} />
         </Link>
