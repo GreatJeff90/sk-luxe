@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
-import Navbar from "@/components/Navbar"; // Assuming you have this
-import Footer from "@/components/Footer"; // Import your Footer
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./globals.css"; 
 
 export const metadata: Metadata = {
@@ -23,8 +24,12 @@ export default function RootLayout({
       <body>
         <CartProvider>
           <WishlistProvider>
-            {/* Navbar is usually present on all pages */}
-            <Navbar />
+            {/* Suspense is required for components that use useSearchParams().
+              The fallback can be set to null or a loading spinner.
+            */}
+            <Suspense fallback={null}>
+              <Navbar />
+            </Suspense>
             
             <main>{children}</main>
             

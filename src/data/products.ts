@@ -10,8 +10,8 @@ export const products = [
   { id: 5, name: "SK Nature Tee", category: "Apparel", image: "/product5.jpeg", price: 25000, sizes: ["XL", "2XL", "3XL"] },
 
   // --- Category: Trousers ---
-  { id: 9, name: "SK Everyday SweatPants", category: "Trousers", image: "/product9.jpeg", price: 25000, sizes: ["XL", "2XL", "3XL"] },
-  { id: 8, name: "SK Everyday SweatPants (Blue)", category: "Trousers", image: "/productt8.jpeg", price: 25000, sizes: ["XL", "2XL", "3XL"] },
+  // { id: 9, name: "SK Everyday SweatPants", category: "Trousers", image: "/product9.jpeg", price: 25000, sizes: ["XL", "2XL", "3XL"] },
+  { id: 8, name: "SK Everyday SweatPants (Blue)", category: "Trousers", image: "/product9.jpeg", price: 25000, sizes: ["XL", "2XL", "3XL"] },
   { id: 13, name: "SK Everyday SweatPants (Grey)", category: "Trousers", image: "/product13.jpeg", price: 25000, sizes: ["XL", "2XL", "3XL"] },
 
   // --- Category: Jackets ---

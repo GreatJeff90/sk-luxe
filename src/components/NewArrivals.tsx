@@ -30,13 +30,10 @@ export default function NewArrivals() {
 
       {/* Content Layer */}
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-end mb-16">
+        <div className="mb-16">
           <h2 className="text-3xl text-white uppercase tracking-[0.2em] font-light">
             Our Store
           </h2>
-          <button className="text-white border-b border-white uppercase tracking-widest text-xs pb-1 hover:opacity-70 transition">
-            See More
-          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

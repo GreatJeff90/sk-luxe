@@ -1,59 +1,69 @@
 "use client";
-import { notFound } from "next/navigation";
-import React, { use, useState } from "react";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 import { products } from "@/data/products";
 import { useCart } from "@/context/CartContext";
-// import Navbar from "@/components/Navbar";
-// import Footer from "@/components/Footer";
+import { useState } from "react";
 
-type Params = Promise<{ id: string }>;
-
-export default function ProductDetail({ params }: { params: Params }) {
-  const { id } = use(params);
+export default function ProductPage() {
+  const { id } = useParams();
   const { addToCart } = useCart();
-  const product = products.find((p) => p.id === parseInt(id));
-  
-  const [selectedSize, setSelectedSize] = useState(product?.sizes[0] || "");
+  const [selectedSize, setSelectedSize] = useState("");
 
-  if (!product) {
-    notFound();
-  }
+  const product = products.find((p) => p.id.toString() === id);
+
+  if (!product) return <div className="py-20 text-center">Product not found</div>;
 
   return (
-    <main className="bg-brand-cream min-h-screen">
-      {/* <Navbar /> */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
-        <div className="grid md:grid-cols-2 gap-16">
-          {/* Product Image */}
-          <div className="aspect-[3/4] bg-brand-green/5 relative overflow-hidden">
-            <Image src={product.image} alt={product.name} fill className="object-cover" />
-          </div>
+    <main className="bg-white min-h-screen py-12 pb-24 md:py-20">
+      {/* Container with increased max-width for desktop */}
+      <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-20 items-start">
+        
+        {/* Product Image */}
+        <div className="aspect-[4/5] bg-gray-100 relative rounded-3xl overflow-hidden shadow-sm">
+          <Image 
+            src={product.image} 
+            alt={product.name} 
+            fill 
+            className="object-cover" 
+            priority 
+          />
+        </div>
 
-          {/* Details */}
-          <div className="space-y-8">
-            <h1 className="text-4xl text-brand-green">{product.name}</h1>
-            <p className="text-2xl text-brand-green/80">₦{product.price.toLocaleString()}</p>
-            
-            {/* Size Select */}
-            <div className="flex gap-2">
-              {product.sizes.map((s) => (
-                <button key={s} onClick={() => setSelectedSize(s)} className={`px-4 py-2 border ${selectedSize === s ? "bg-brand-green text-white" : "border-brand-green"}`}>
-                  {s}
+        {/* Product Details */}
+        <div className="flex flex-col pt-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">{product.name}</h1>
+          <p className="text-xl font-semibold mb-8 text-gray-700">₦{product.price.toLocaleString()}</p>
+
+          {/* Size Selector */}
+          <div className="mb-10">
+            <p className="text-sm font-medium mb-4 uppercase tracking-widest text-gray-500">Select size</p>
+            <div className="flex flex-wrap gap-3">
+              {product.sizes.map((size) => (
+                <button 
+                  key={size}
+                  onClick={() => setSelectedSize(size)}
+                  className={`px-8 py-3 border rounded-full transition-all ${
+                    selectedSize === size 
+                      ? "border-black bg-black text-white" 
+                      : "border-gray-200 hover:border-black"
+                  }`}
+                >
+                  {size}
                 </button>
               ))}
             </div>
-
-            <button 
-              onClick={() => addToCart(product, selectedSize)}
-              className="w-full py-4 bg-brand-green text-white uppercase"
-            >
-              Add to Cart
-            </button>
           </div>
+
+          {/* Add to Cart Button */}
+          <button 
+            onClick={() => addToCart(product, selectedSize || product.sizes[0])}
+            className="w-full md:w-auto bg-black text-white py-4 px-12 rounded-full font-bold uppercase tracking-widest hover:opacity-90 transition-opacity"
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
-      {/* <Footer /> */}
     </main>
   );
 }

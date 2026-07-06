@@ -1,22 +1,32 @@
 "use client";
-import { useState } from "react";
-import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 
 const categories = ["All", "Tracksuits", "Apparel", "Trousers", "Jackets"];
 
 export default function Categories() {
-  const [active, setActive] = useState("All");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  // Get current category from URL, default to "All"
+  const active = searchParams.get("category") || "All";
+
+  const handleCategoryChange = (cat: string) => {
+    // If "All", remove the search param, otherwise set it
+    if (cat === "All") {
+      router.push("/shop");
+    } else {
+      router.push(`/shop?category=${cat.toLowerCase()}`);
+    }
+  };
 
   return (
-    <section className="py-8 bg-brand-cream">
+    <section className="py-8 bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Horizontal scroll container with increased padding and text size for all screens */}
         <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
           {categories.map((cat) => (
-            <Link
-              href={`/shop/${cat.toLowerCase()}`}
+            <button
               key={cat}
-              onClick={() => setActive(cat)}
+              onClick={() => handleCategoryChange(cat)}
               className={`
                 px-8 py-3 rounded-full text-sm font-medium uppercase tracking-widest whitespace-nowrap transition-all duration-300
                 ${active === cat 
@@ -25,7 +35,7 @@ export default function Categories() {
               `}
             >
               {cat}
-            </Link>
+            </button>
           ))}
         </div>
       </div>
