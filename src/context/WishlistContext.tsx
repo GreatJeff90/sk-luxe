@@ -7,7 +7,8 @@ interface Product {
   name: string;
   price: number;
   image: string;
-  // Add other properties if your products have them
+  category: string;    
+  sizes: string[];
 }
 
 // 2. Define the context shape

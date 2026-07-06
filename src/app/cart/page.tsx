@@ -1,7 +1,7 @@
 "use client";
 import { useCart } from "@/context/CartContext";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+// import Navbar from "@/components/Navbar";
+// import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link"; // FIXED IMPORT
 
@@ -11,7 +11,7 @@ export default function CartPage() {
 
   return (
     <main className="bg-brand-cream min-h-screen">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="max-w-4xl mx-auto px-6 py-20">
         <h1 className="text-3xl text-brand-green uppercase tracking-widest font-light mb-12">Your Cart</h1>
@@ -47,7 +47,7 @@ export default function CartPage() {
         )}
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

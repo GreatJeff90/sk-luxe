@@ -2,8 +2,8 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+// import Navbar from "@/components/Navbar";
+// import Footer from "@/components/Footer";
 import { products } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 
@@ -24,7 +24,7 @@ export default function ShopPage() {
 
   return (
     <main className="bg-brand-cream min-h-screen">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row gap-16">
         {/* Sidebar Filters */}
@@ -89,7 +89,7 @@ export default function ShopPage() {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

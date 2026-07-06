@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ProfileSidebar from "@/components/ProfileSidebar";
+// import Navbar from "@/components/Navbar";
+// import Footer from "@/components/Footer";
+// import ProfileSidebar from "@/components/ProfileSidebar";
 import { useRouter } from "next/navigation";
 import { User } from "@supabase/supabase-js";
 
@@ -49,17 +49,17 @@ export default function ProfilePage() {
 
   return (
     <main className="bg-brand-cream min-h-screen">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="max-w-6xl mx-auto py-16 px-6">
         <h1 className="text-4xl font-serif text-brand-green mb-12">My Account</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Using the component here */}
-          <ProfileSidebar 
-            activeTab={activeTab} 
+          {/* <ProfileSidebar  */}
+            {/* activeTab={activeTab} 
             setActiveTab={setActiveTab} 
             onLogout={handleSignOut} 
-          />
+          /> */}
 
           {/* Content Area */}
           <section className="md:col-span-3 bg-white p-8 shadow-sm min-h-[400px]">
@@ -86,7 +86,7 @@ export default function ProfilePage() {
           </section>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 import { useCart } from "@/context/CartContext";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+// import Navbar from "@/components/Navbar";
+// import Footer from "@/components/Footer";
 
 export default function CheckoutPage() {
   const { cart } = useCart();
@@ -9,7 +9,7 @@ export default function CheckoutPage() {
 
   return (
     <main className="bg-brand-cream min-h-screen">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="max-w-5xl mx-auto px-6 py-20">
         <h1 className="text-3xl text-brand-green uppercase tracking-widest font-light mb-12">Checkout</h1>
@@ -48,7 +48,7 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

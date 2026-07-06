@@ -4,8 +4,8 @@ import React, { use, useState } from "react";
 import Image from "next/image";
 import { products } from "@/data/products";
 import { useCart } from "@/context/CartContext";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+// import Navbar from "@/components/Navbar";
+// import Footer from "@/components/Footer";
 
 type Params = Promise<{ id: string }>;
 
@@ -22,7 +22,7 @@ export default function ProductDetail({ params }: { params: Params }) {
 
   return (
     <main className="bg-brand-cream min-h-screen">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="grid md:grid-cols-2 gap-16">
           {/* Product Image */}
@@ -53,7 +53,7 @@ export default function ProductDetail({ params }: { params: Params }) {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }
