@@ -2,9 +2,10 @@
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
+import { X } from "lucide-react"; // Import a close icon
 
 export default function CartPage() {
-  const { cart } = useCart();
+  const { cart, removeFromCart } = useCart(); // Added removeFromCart
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
@@ -22,7 +23,7 @@ export default function CartPage() {
         ) : (
           <div className="space-y-8">
             {cart.map((item, index) => (
-              <div key={index} className="flex gap-6 border-b border-gray-100 pb-8">
+              <div key={index} className="flex gap-6 border-b border-gray-100 pb-8 relative">
                 <div className="w-24 h-32 bg-gray-100 relative overflow-hidden">
                   <Image src={item.image} alt={item.name} fill className="object-cover" />
                 </div>
@@ -31,6 +32,15 @@ export default function CartPage() {
                   <p className="text-sm text-gray-500">Size: {item.selectedSize}</p>
                   <p className="text-black font-bold mt-2">₦{item.price.toLocaleString()}</p>
                 </div>
+                
+                {/* Remove Button */}
+                <button 
+                  onClick={() => removeFromCart(item.id)} 
+                  className="absolute top-0 right-0 p-2 text-gray-400 hover:text-black transition"
+                  title="Remove item"
+                >
+                  <X size={20} />
+                </button>
               </div>
             ))}
 

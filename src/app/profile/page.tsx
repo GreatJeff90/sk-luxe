@@ -1,92 +1,96 @@
 "use client";
-import { useEffect, useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
-// import Navbar from "@/components/Navbar";
-// import Footer from "@/components/Footer";
-// import ProfileSidebar from "@/components/ProfileSidebar";
 import { useRouter } from "next/navigation";
-import { User } from "@supabase/supabase-js";
-
-interface Order {
-  id: string;
-  total_amount: number;
-  created_at: string;
-}
+import { User } from "@supabase/supabase-js"; // Import the specific type
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [activeTab, setActiveTab] = useState("My Orders");
-  const router = useRouter();
+  const [address, setAddress] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const router = useRouter()
 
-  const loadOrders = useCallback(async (userId: string) => {
-    const { data } = await supabase
-      .from("orders")
-      .select("*")
-      .eq("user_id", userId);
-    if (data) setOrders(data as Order[]);
-  }, []);
+  // Mock data for "Live Orders" - In a real app, fetch this from Supabase
+  const liveOrders = [
+    { id: "SK-9921", status: "In Transit", total: "₦50,000" },
+  ];
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const fetchUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        router.push("/login");
-        return;
-      }
-      setUser(session.user);
-      loadOrders(session.user.id);
+      if (!session) router.push("/login");
+      else setUser(session.user);
     };
-    checkAuth();
-  }, [router, loadOrders]);
+    fetchUser();
+  }, [router]);
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    router.push("/");
-  };
-
-  if (!user) return <div className="bg-brand-cream min-h-screen flex items-center justify-center">Loading...</div>;
+  if (!user) return <div className="py-20 text-center">Loading...</div>;
 
   return (
-    <main className="bg-brand-cream min-h-screen">
-      {/* <Navbar /> */}
-      <div className="max-w-6xl mx-auto py-16 px-6">
-        <h1 className="text-4xl font-serif text-brand-green mb-12">My Account</h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Using the component here */}
-          {/* <ProfileSidebar  */}
-            {/* activeTab={activeTab} 
-            setActiveTab={setActiveTab} 
-            onLogout={handleSignOut} 
-          /> */}
+    <main className="bg-white min-h-screen py-20">
+      <div className="max-w-5xl mx-auto px-6">
+        <h1 className="text-3xl text-black uppercase tracking-widest font-light mb-12">My Account</h1>
 
-          {/* Content Area */}
-          <section className="md:col-span-3 bg-white p-8 shadow-sm min-h-[400px]">
-            <h2 className="text-xl font-bold mb-6 uppercase tracking-widest">{activeTab}</h2>
+        <div className="grid md:grid-cols-3 gap-12">
+          {/* Account Info */}
+          <section className="md:col-span-1 space-y-6">
+            <h2 className="text-xs font-bold uppercase tracking-widest">Account Details</h2>
+            <div className="bg-gray-50 p-6 rounded-2xl">
+              <p className="text-sm text-gray-500 mb-1">Email</p>
+              <p className="font-medium text-black">{user.email}</p>
+            </div>
             
-            {activeTab === "My Orders" && (
-              orders.length === 0 ? (
-                <p className="text-brand-green/60 italic">No orders found.</p>
-              ) : (
-                <div className="space-y-4">
-                  {orders.map((order) => (
-                    <div key={order.id} className="border-b border-brand-green/10 py-4 flex justify-between items-center">
-                      <p>Order #{order.id.slice(0, 8)}</p>
-                      <p className="font-bold">₦{order.total_amount?.toLocaleString()}</p>
-                    </div>
-                  ))}
+            {/* Address Management */}
+            <div className="space-y-4">
+              <h2 className="text-xs font-bold uppercase tracking-widest">Shipping Address</h2>
+              {isEditing ? (
+                <div className="space-y-2">
+                  <textarea 
+                    className="w-full p-4 border rounded-xl focus:border-black outline-none"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Enter full delivery address"
+                  />
+                  <button onClick={() => setIsEditing(false)} className="bg-black text-white px-6 py-2 rounded-lg text-sm">Save</button>
                 </div>
-              )
-            )}
-            
-            {activeTab !== "My Orders" && (
-              <p className="text-brand-green/40">Section under construction.</p>
+              ) : (
+                <div className="bg-gray-50 p-6 rounded-2xl">
+                  <p className="text-sm text-gray-700">{address || "No address saved."}</p>
+                  <button onClick={() => setIsEditing(true)} className="text-black underline text-xs mt-4">Edit Address</button>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Live Orders */}
+          <section className="md:col-span-2 space-y-6">
+            <h2 className="text-xs font-bold uppercase tracking-widest">Live Orders</h2>
+            {liveOrders.length > 0 ? (
+              <div className="space-y-4">
+                {liveOrders.map((order) => (
+                  <div key={order.id} className="border border-gray-100 p-6 rounded-2xl flex justify-between items-center">
+                    <div>
+                      <p className="font-bold">Order {order.id}</p>
+                      <p className="text-xs text-gray-500">Status: {order.status}</p>
+                    </div>
+                    <p className="font-bold">{order.total}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-gray-400 italic">No active orders at the moment.</p>
             )}
           </section>
         </div>
+        
+        {/* Logout */}
+        <button 
+          onClick={async () => { await supabase.auth.signOut(); router.push("/"); }}
+          className="mt-16 text-xs text-gray-400 hover:text-red-600 transition"
+        >
+          Sign Out
+        </button>
       </div>
-      {/* <Footer /> */}
     </main>
   );
 }
