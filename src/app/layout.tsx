@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { ThemeProvider } from "next-themes"; // Import this
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import Navbar from "@/components/Navbar";
@@ -20,25 +21,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <CartProvider>
-          <WishlistProvider>
-            {/* Suspense is required for components that use useSearchParams().
-              The fallback can be set to null or a loading spinner.
-            */}
-            <Suspense fallback={null}>
-              <Navbar />
-            </Suspense>
-            
-            <main>{children}</main>
-            
-            {/* Footer: Hidden on mobile, visible on large screens (lg:block) */}
-            <div className="hidden lg:block">
-              <Footer />
-            </div>
-          </WishlistProvider>
-        </CartProvider>
+    // suppressHydrationWarning is necessary to prevent console errors 
+    // when next-themes injects the initial theme class
+    <html lang="en" suppressHydrationWarning>
+      <body className="transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <CartProvider>
+            <WishlistProvider>
+              <Suspense fallback={null}>
+                <Navbar />
+              </Suspense>
+              
+              <main>{children}</main>
+              
+              <div className="hidden lg:block">
+                <Footer />
+              </div>
+            </WishlistProvider>
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
