@@ -2,8 +2,8 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link"; // Import Link
-import { Heart, ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { Heart } from "lucide-react";
 import { products } from "@/data/products";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
@@ -24,17 +24,20 @@ export default function ShopDisplay() {
   }, [activeCategory]);
 
   return (
-    <section className="py-16 bg-white">
+    // Added dark:bg-black for background change
+    <section className="py-16 bg-white dark:bg-black transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Categories Nav: Scrollable on small screens */}
+        {/* Categories Nav */}
         <div className="flex gap-3 overflow-x-auto pb-8 scrollbar-hide justify-start md:justify-center mb-8 px-2">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-8 py-3 rounded-full text-sm font-medium uppercase tracking-widest whitespace-nowrap transition-all duration-300 ${
-                activeCategory === cat ? "bg-black text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                activeCategory === cat 
+                  ? "bg-black dark:bg-white text-white dark:text-black" 
+                  : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"
               }`}
             >
               {cat}
@@ -43,7 +46,6 @@ export default function ShopDisplay() {
         </div>
 
         {/* Product Grid */}
-        {/* Changed grid-cols-1 to grid-cols-2 for mobile, kept md:grid-cols-3 for desktop */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
           {filteredProducts.map((product) => {
             const inWishlist = isWishlisted(product.id);
@@ -52,11 +54,11 @@ export default function ShopDisplay() {
                 key={product.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="bg-white p-2 md:p-4 group border border-gray-50 flex flex-col"
+                // Added dark:bg-gray-900 and dark:border-gray-800
+                className="bg-white dark:bg-gray-900 p-2 md:p-4 group border border-gray-50 dark:border-gray-800 flex flex-col"
               >
-                {/* Image Section */}
                 <Link href={`/shop/${product.id}`} className="block">
-                  <div className="aspect-[4/5] bg-gray-100 mb-4 overflow-hidden relative">
+                  <div className="aspect-[4/5] bg-gray-100 dark:bg-gray-800 mb-4 overflow-hidden relative">
                     <Image 
                       src={product.image}
                       alt={product.name}
@@ -66,8 +68,8 @@ export default function ShopDisplay() {
                     />
                   </div>
                   <div className="space-y-0.5 mb-4">
-                    <h3 className="text-[10px] md:text-sm uppercase tracking-widest font-medium text-black truncate">{product.name}</h3>
-                    <p className="text-[10px] md:text-sm font-bold text-black">₦{product.price.toLocaleString()}</p>
+                    <h3 className="text-[10px] md:text-sm uppercase tracking-widest font-medium text-black dark:text-white truncate">{product.name}</h3>
+                    <p className="text-[10px] md:text-sm font-bold text-black dark:text-white">₦{product.price.toLocaleString()}</p>
                   </div>
                 </Link>
                 
@@ -75,13 +77,13 @@ export default function ShopDisplay() {
                 <div className="flex gap-1 mt-auto">
                     <button 
                       onClick={(e) => { e.preventDefault(); inWishlist ? removeFromWishlist(product.id) : addToWishlist(product); }}
-                      className={`p-2 flex-1 border rounded-lg transition ${inWishlist ? "border-red-500 text-red-500" : "border-gray-200 text-black hover:bg-gray-50"}`}
+                      className={`p-2 flex-1 border rounded-lg transition ${inWishlist ? "border-red-500 text-red-500" : "border-gray-200 dark:border-gray-700 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800"}`}
                     >
                       <Heart size={16} fill={inWishlist ? "currentColor" : "none"} className="mx-auto" />
                     </button>
                     <button 
                       onClick={(e) => { e.preventDefault(); addToCart({ ...product, id: Number(product.id) }, "Default"); }}
-                      className="p-2 flex-[2] bg-black text-white rounded-lg hover:bg-gray-800 transition text-[10px] md:text-xs uppercase"
+                      className="p-2 flex-[2] bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition text-[10px] md:text-xs uppercase"
                     >
                       Add
                     </button>
