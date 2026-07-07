@@ -47,7 +47,7 @@ export const products = [
     name: "SK Nature Tee", 
     category: "Apparel", 
     image: "/product5a.png", 
-    images: ["/product5a.png", "/product5a.png", "/product5a.png"],
+    images: ["/product5.jpeg", "/product5a.png", "/product5a.png"],
     description: "A minimalist tee crafted from high-quality, breathable fabric for daily wear.",
     price: 25000, 
     sizes: ["XL", "2XL", "3XL"] 
@@ -59,7 +59,7 @@ export const products = [
     name: "SK Everyday SweatPants (Blue)", 
     category: "Trousers", 
     image: "/product13a.png", 
-    images: ["/product13a.png", "/product13a.png", "/product13a.png"],
+    images: ["/product8.jpeg", "/product13.jpeg", "/product13a.png"],
     description: "Effortlessly comfortable sweatpants in a deep, vibrant blue hue.",
     price: 25000, 
     sizes: ["XL", "2XL", "3XL"] 
@@ -101,7 +101,7 @@ export const products = [
     name: "Black Zip Jacket", 
     category: "Jackets", 
     image: "/product3a.png", 
-    images: ["/product3a.png", "/product3a.png", "/product3a.png"],
+    images: ["/product1b.jpeg", "/model3.jpeg", "/product3a.png"],
     description: "A sleek black zip jacket designed for layering in style.",
     price: 30000, 
     sizes: ["XL", "2XL", "3XL"] 
@@ -111,7 +111,7 @@ export const products = [
     name: "White Zip Jacket", 
     category: "Jackets", 
     image: "/product10a.png", 
-    images: ["/product10a.png", "/product10a.png", "/product10a.png"],
+    images: ["/product10a.png", "/product10.jpeg", "/product25.jpeg"],
     description: "A crisp white jacket that offers a clean, luxury look for any occasion.",
     price: 30000, 
     sizes: ["XL", "2XL", "3XL"] 
