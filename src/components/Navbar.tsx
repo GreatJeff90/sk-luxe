@@ -6,7 +6,6 @@ import { useCart } from "@/context/CartContext";
 import { useState, useEffect } from 'react';
 import { supabase } from "../lib/supabaseClient";
 import MobileSidebar from './MobileSidebar';
-import { ThemeToggle } from './ThemeToggle';
 
 export default function Navbar() {
   const { cart } = useCart();
@@ -25,9 +24,9 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Ensure MobileSidebar receives the ThemeToggle component to place at the bottom */}
       <MobileSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
+      {/* TOP NAV */}
       <nav className="sticky top-0 z-50 bg-black text-white p-4">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <button onClick={() => setIsSidebarOpen(true)} className="md:hidden"><Menu size={24} /></button>
@@ -39,7 +38,6 @@ export default function Navbar() {
           <div className="hidden md:flex gap-8 text-xs font-medium uppercase tracking-widest text-gray-400">
             <Link href="/shop" className="hover:text-white">Collections</Link>
             <Link href="/wishlist" className="hover:text-white">Wishlist</Link>
-            <ThemeToggle />
           </div>
 
           <div className="flex items-center gap-6">
@@ -52,7 +50,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* MOBILE BOTTOM NAV - Updated: Profile back, ThemeToggle removed */}
+      {/* MOBILE BOTTOM NAV */}
       <div className="md:hidden fixed bottom-4 left-4 right-4 z-50 bg-white border border-gray-200 rounded-full shadow-lg px-6 py-3 flex items-center justify-between text-gray-600">
         <Link href="/" className="flex flex-col items-center text-[10px]"><Home size={18} /> Home</Link>
         <Link href="/shop" className="flex flex-col items-center text-[10px]"><List size={18} /> Shop</Link>
