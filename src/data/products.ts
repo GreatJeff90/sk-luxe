@@ -1,23 +1,119 @@
 export const products = [
   // --- Category: Tracksuits ---
-  { id: 1, name: "SK Retro Tracksuit", category: "Tracksuits", image: "/product1a.png", price: 50000, sizes: ["XL", "2XL", "3XL"] },
-  { id: 2, name: "SK Retro Tracksuit (Set)", category: "Tracksuits", image: "/product2a.png", price: 50000, sizes: ["XL", "2XL", "3XL"] },
-  { id: 6, name: "SK Retro Tracksuit (Variant)", category: "Tracksuits", image: "/product14a.png", price: 50000, sizes: ["XL", "2XL", "3XL"] },
-  // { id: 20, name: "SK Motion Tracksuit", category: "Tracksuits", image: "/product20.jpeg", price: 35000, sizes: ["XL", "2XL", "3XL"] },
-  { id: 26, name: "SK Motion Tracksuit (Variant)", category: "Tracksuits", image: "/product26a.png", price: 35000, sizes: ["XL", "2XL", "3XL"] },
+  { 
+    id: 1, 
+    name: "SK Retro Tracksuit", 
+    category: "Tracksuits", 
+    image: "/product1.png", 
+    images: ["/product1.jpeg", "/product1a.png", "/product3.jpeg"],
+    description: "A premium retro-inspired tracksuit designed for comfort and a luxury aesthetic.",
+    price: 50000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 2, 
+    name: "SK Retro Tracksuit (Set)", 
+    category: "Tracksuits", 
+    image: "/product2.png", 
+    images: ["/product4.jpeg", "/product6a.jpeg", "/product25.jpeg"],
+    description: "Complete your look with this matching retro set, perfect for casual luxury outings.",
+    price: 50000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 6, 
+    name: "SK Retro Tracksuit (Variant)", 
+    category: "Tracksuits", 
+    image: "/product14a.png", 
+    images: ["/product14.jpeg", "/product15.jpeg", "/product14a.png"],
+    description: "Our signature retro tracksuit in an exclusive variant colorway.",
+    price: 50000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 26, 
+    name: "SK Motion Tracksuit (Variant)", 
+    category: "Tracksuits", 
+    image: "/product26a.png", 
+    images: ["/product20.jpeg", "/product26.jpeg", "/product26a.jpeg"],
+    description: "Engineered for movement without compromising on style.",
+    price: 35000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
 
   // --- Category: Apparel ---
-  { id: 5, name: "SK Nature Tee", category: "Apparel", image: "/product5a.png", price: 25000, sizes: ["XL", "2XL", "3XL"] },
+  { 
+    id: 5, 
+    name: "SK Nature Tee", 
+    category: "Apparel", 
+    image: "/product5a.png", 
+    images: ["/product5a.png", "/product5a.png", "/product5a.png"],
+    description: "A minimalist tee crafted from high-quality, breathable fabric for daily wear.",
+    price: 25000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
 
   // --- Category: Trousers ---
-  // { id: 9, name: "SK Everyday SweatPants", category: "Trousers", image: "/product9.jpeg", price: 25000, sizes: ["XL", "2XL", "3XL"] },
-  { id: 8, name: "SK Everyday SweatPants (Blue)", category: "Trousers", image: "/product13a.png", price: 25000, sizes: ["XL", "2XL", "3XL"] },
-  { id: 13, name: "SK Everyday SweatPants (Grey)", category: "Trousers", image: "/product9a.png", price: 25000, sizes: ["XL", "2XL", "3XL"] },
-  { id: 14, name: "SK Everyday SweatPants (Ox Blood)", category: "Trousers", image: "/product18a.png", price: 25000, sizes: ["XL", "2XL", "3XL"] },
-  { id: 15, name: "SK Everyday SweatPants (Green)", category: "Trousers", image: "/product23a.png", price: 25000, sizes: ["XL", "2XL", "3XL"] },
-
+  { 
+    id: 8, 
+    name: "SK Everyday SweatPants (Blue)", 
+    category: "Trousers", 
+    image: "/product13a.png", 
+    images: ["/product13a.png", "/product13a.png", "/product13a.png"],
+    description: "Effortlessly comfortable sweatpants in a deep, vibrant blue hue.",
+    price: 25000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 13, 
+    name: "SK Everyday SweatPants (Grey)", 
+    category: "Trousers", 
+    image: "/product9a.png", 
+    images: ["/product9a.png", "/product9a.png", "/product9a.png"],
+    description: "The essential grey sweatpant. Versatile, soft, and built to last.",
+    price: 25000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 14, 
+    name: "SK Everyday SweatPants (Ox Blood)", 
+    category: "Trousers", 
+    image: "/product18a.png", 
+    images: ["/product18a.png", "/product18a.png", "/product18a.png"],
+    description: "Make a statement with these rich ox blood sweatpants.",
+    price: 25000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 15, 
+    name: "SK Everyday SweatPants (Green)", 
+    category: "Trousers", 
+    image: "/product23a.png", 
+    images: ["/product23a.png", "/product23a.png", "/product23a.png"],
+    description: "A refreshing take on everyday comfort with a deep forest green finish.",
+    price: 25000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
 
   // --- Category: Jackets ---
-  { id: 3, name: "Black Zip Jacket", category: "Jackets", image: "/product3a.png", price: 30000, sizes: ["XL", "2XL", "3XL"] },
-  { id: 10, name: "White Zip Jacket", category: "Jackets", image: "/product10a.png", price: 30000, sizes: ["XL", "2XL", "3XL"] }
+  { 
+    id: 3, 
+    name: "Black Zip Jacket", 
+    category: "Jackets", 
+    image: "/product3a.png", 
+    images: ["/product3a.png", "/product3a.png", "/product3a.png"],
+    description: "A sleek black zip jacket designed for layering in style.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 10, 
+    name: "White Zip Jacket", 
+    category: "Jackets", 
+    image: "/product10a.png", 
+    images: ["/product10a.png", "/product10a.png", "/product10a.png"],
+    description: "A crisp white jacket that offers a clean, luxury look for any occasion.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  }
 ];
