@@ -1,17 +1,17 @@
 export const products = [
-  // --- Category: Tracksuits ---
+  // --- Category: Tracksuits (100+) ---
   { 
-    id: 1, 
+    id: 101, 
     name: "SK Retro Tracksuit", 
     category: "Tracksuits", 
     image: "/product.png", 
-    images: ["/product1.jpeg", "new-products/tracksuit5.png", "/product3.jpeg"],
+    images: ["/product1.jpeg", "/new-products/tracksuit5.jpeg", "/product3.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 50000, 
     sizes: ["XL", "2XL", "3XL"] 
   },
   { 
-    id: 2, 
+    id: 102, 
     name: "SK Retro Tracksuit (Set)", 
     category: "Tracksuits", 
     image: "/product2.png", 
@@ -21,17 +21,17 @@ export const products = [
     sizes: ["XL", "2XL", "3XL"] 
   },
   { 
-    id: 3, 
+    id: 103, 
     name: "SK Retro Tracksuit (Mono)", 
     category: "Tracksuits", 
-    image: "/product (7).png", 
+    image: "/product (10).png", 
     images: ["/new-products/tracksuit6.jpeg", "/new-products/tracksuit3.jpeg", "/new-products/tracksuit4.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 50000, 
     sizes: ["XL", "2XL", "3XL"] 
   },
   { 
-    id: 6, 
+    id: 104, 
     name: "SK Retro Tracksuit (Variant)", 
     category: "Tracksuits", 
     image: "/product (1).png", 
@@ -41,7 +41,7 @@ export const products = [
     sizes: ["XL", "2XL", "3XL"] 
   },
   { 
-    id: 26, 
+    id: 105, 
     name: "SK Motion Tracksuit (Variant)", 
     category: "Tracksuits", 
     image: "/product (3).png", 
@@ -51,9 +51,9 @@ export const products = [
     sizes: ["XL", "2XL", "3XL"] 
   },
 
-  // --- Category: Tees ---
+  // --- Category: Tees (200+) ---
   { 
-    id: 5, 
+    id: 201, 
     name: "SK Nature Tee", 
     category: "Tees", 
     image: "/product (5).png", 
@@ -62,52 +62,112 @@ export const products = [
     price: 30000, 
     sizes: ["XL", "2XL", "3XL"] 
   },
-
-  // --- Category: Trousers ---
   { 
-    id: 8, 
-    name: "SK Everyday SweatPants (Blue)", 
+    id: 202, 
+    name: "SK Nature Tee", 
+    category: "Tees", 
+    image: "/new-products/tee8.jpeg", 
+    images: ["/model2.jpeg", "/new-products/tee8.jpeg", "/model1.jpeg"],
+    description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 203, 
+    name: "SK Nature Tee", 
+    category: "Tees", 
+    image: "/new-products/tee9.jpeg", 
+    images: ["/new-products/tee9.jpeg", "/new-products/tee7.jpeg", "/new-products/tee6.jpeg"],
+    description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 204, 
+    name: "SK Nature Tee", 
+    category: "Tees", 
+    image: "/new-products/tee1.jpeg", 
+    images: ["/new-products/tee1.jpeg", "/new-products/tee1.jpeg", "/new-products/tee1.jpeg"],
+    description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 205, 
+    name: "SK Nature Tee", 
+    category: "Tees", 
+    image: "/new-products/tee2.jpeg", 
+    images: ["/new-products/tee2.jpeg", "/new-products/tee2.jpeg", "/new-products/tee2.jpeg"],
+    description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 206, 
+    name: "SK Nature Tee", 
+    category: "Tees", 
+    image: "/new-products/tee3.jpeg", 
+    images: ["/new-products/tee3.jpeg", "/new-products/tee3.jpeg", "/new-products/tee3.jpeg"],
+    description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 207, 
+    name: "SK Nature Tee", 
+    category: "Tees", 
+    image: "/new-products/tee4.jpeg", 
+    images: ["/new-products/tee4.jpeg", "/new-products/tee4.jpeg", "/new-products/tee4.jpeg"],
+    description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 208, 
+    name: "SK Nature Tee", 
+    category: "Tees", 
+    image: "/new-products/tee5.jpeg", 
+    images: ["/new-products/tee5.jpeg", "/new-products/tee5.jpeg", "/new-products/tee5.jpeg"],
+    description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+
+  // --- Category: Trousers (300+) ---
+  { 
+    id: 301, 
+    name: "SK Everyday SweatPants", 
     category: "Trousers", 
-    image: "/product13a.png", 
+    image: "/product (11).png", 
     images: ["/product8.jpeg", "/product13.jpeg", "/product13a.png"],
     description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
     price: 30000, 
     sizes: ["XL", "2XL", "3XL"] 
   },
   { 
-    id: 13, 
-    name: "SK Everyday SweatPants (Grey)", 
+    id: 302, 
+    name: "SK Everyday SweatPants", 
     category: "Trousers", 
-    image: "/product9a.png", 
-    images: ["/product9a.png", "/product9a.png", "/product9a.png"],
+    image: "/product9.jpeg", 
+    images: ["/product11.jpeg", "/product12.jpeg", "/product9a.png"],
     description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
     price: 25000, 
     sizes: ["XL", "2XL", "3XL"] 
   },
   { 
-    id: 14, 
-    name: "SK Everyday SweatPants (Ox Blood)", 
+    id: 303, 
+    name: "SK Everyday SweatPants", 
     category: "Trousers", 
-    image: "/product18a.png", 
-    images: ["/product18a.png", "/product18a.png", "/product18a.png"],
-    description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
-    price: 25000, 
-    sizes: ["XL", "2XL", "3XL"] 
-  },
-  { 
-    id: 15, 
-    name: "SK Everyday SweatPants (Green)", 
-    category: "Trousers", 
-    image: "/product23a.png", 
+    image: "/product23.jpeg", 
     images: ["/product23a.png", "/product23a.png", "/product23a.png"],
     description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
     price: 25000, 
     sizes: ["XL", "2XL", "3XL"] 
   },
 
-  // --- Category: Jackets ---
+  // --- Category: Jackets (400+) ---
   { 
-    id: 3, 
+    id: 401, 
     name: "Black Zip Jacket", 
     category: "Jackets", 
     image: "/product3a.png", 
@@ -117,7 +177,7 @@ export const products = [
     sizes: ["XL", "2XL", "3XL"] 
   },
   { 
-    id: 10, 
+    id: 402, 
     name: "White Zip Jacket", 
     category: "Jackets", 
     image: "/product10a.png", 
@@ -127,9 +187,9 @@ export const products = [
     sizes: ["XL", "2XL", "3XL"] 
   },
 
-  // --- Category: Sleeveless ---
+  // --- Category: Sleeveless (500+) ---
   { 
-    id: 21, 
+    id: 501, 
     name: "SK Legacy Sleeveless ", 
     category: "Sleeveless", 
     image: "/product (8).png", 
@@ -139,8 +199,8 @@ export const products = [
     sizes: ["XL", "2XL", "3XL"] 
   },
   { 
-    id: 22, 
-     name: "SK Legacy Sleeveless", 
+    id: 502, 
+    name: "SK Legacy Sleeveless", 
     category: "Sleeveless", 
     image: "/product (9).png", 
     images: ["/new-products/sleeveless2.jpeg", "/new-products/sleeveless2.jpeg", "/new-products/sleeveless2.jpeg"],

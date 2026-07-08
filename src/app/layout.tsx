@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { ThemeProvider } from "next-themes"; // Import this
+import { ThemeProvider } from "next-themes";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import "./globals.css"; 
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "SK LUXE",
@@ -21,10 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // suppressHydrationWarning is necessary to prevent console errors 
-    // when next-themes injects the initial theme class
     <html lang="en" suppressHydrationWarning>
-      <body className="transition-colors duration-300">
+      <body className="transition-colors duration-300 bg-white dark:bg-black text-black dark:text-white">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <CartProvider>
             <WishlistProvider>
@@ -34,9 +32,9 @@ export default function RootLayout({
               
               <main>{children}</main>
               
-              <div className=" lg:block sm:block md:block">
+              <footer className="border-t border-gray-100 dark:border-gray-800 pb-20">
                 <Footer />
-              </div>
+              </footer>
             </WishlistProvider>
           </CartProvider>
         </ThemeProvider>
