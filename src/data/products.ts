@@ -5,7 +5,7 @@ export const products = [
     name: "SK Retro Tracksuit", 
     category: "Tracksuits", 
     image: "/product.png", 
-    images: ["/product1.jpeg", "/new-products/tracksuit5.jpeg", "/product3.jpeg"],
+    images: ["/product1.jpeg", "/new-products/tracksuit5.jpeg", "/model3.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 50000, 
     sizes: ["XL", "2XL", "3XL"] 
@@ -15,7 +15,7 @@ export const products = [
     name: "SK Retro Tracksuit (Set)", 
     category: "Tracksuits", 
     image: "/product2.png", 
-    images: ["/product4.jpeg", "/new-products/tracksuit2.jpeg", "/new-products/tracksuit1.jpeg"],
+    images: ["/product4.jpeg", "/new-products/tracksuit2.jpeg", "/product21.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 50000, 
     sizes: ["XL", "2XL", "3XL"] 
@@ -45,7 +45,7 @@ export const products = [
     name: "SK Motion Tracksuit (Variant)", 
     category: "Tracksuits", 
     image: "/product (3).png", 
-    images: ["/product (3).png", "/product (3).png", "/product (3).png"],
+    images: ["/product20.jpeg", "/product (3).png", "/product (3).png"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 35000, 
     sizes: ["XL", "2XL", "3XL"] 
