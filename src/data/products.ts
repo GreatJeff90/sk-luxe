@@ -71,7 +71,7 @@ export const products = [
     image: "/product13a.png", 
     images: ["/product8.jpeg", "/product13.jpeg", "/product13a.png"],
     description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
-    price: 25000, 
+    price: 30000, 
     sizes: ["XL", "2XL", "3XL"] 
   },
   { 
