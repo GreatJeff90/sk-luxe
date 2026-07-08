@@ -34,7 +34,7 @@ export default function RootLayout({
               
               <main>{children}</main>
               
-              <div className="hidden lg:block sm:block">
+              <div className=" lg:block sm:block md:block">
                 <Footer />
               </div>
             </WishlistProvider>

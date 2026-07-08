@@ -21,7 +21,7 @@ export default function ProductPage() {
   const images = product.images || [product.image];
 
   return (
-    <main className="bg-white dark:bg-black min-h-screen py-12 md:py-20">
+    <main className="bg-white dark:bg-black min-h-screen py-20 md:py-20">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
         
         {/* Gallery Section */}
