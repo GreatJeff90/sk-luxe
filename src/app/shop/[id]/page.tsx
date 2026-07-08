@@ -19,7 +19,7 @@ export default function ProductPage() {
   const displayImage = mainImage || product.image;
 
   return (
-    <main className="bg-white dark:bg-black min-h-screen py-12 md:py-20">
+    <main className="bg-white dark:bg-black min-h-screen py-12 md:py-20 py-20">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
         
         {/* Gallery Section */}
@@ -67,7 +67,7 @@ export default function ProductPage() {
 
           <button 
             onClick={() => addToCart(product, selectedSize || product.sizes[0])}
-            className="w-full md:w-auto bg-black dark:bg-white text-white dark:text-black py-4 px-12 rounded-full font-bold uppercase tracking-widest hover:opacity-90 transition-opacity"
+            className="w-full md:w-auto bg-black dark:bg-white text-white dark:text-black py-4 px-12 rounded-full font-bold uppercase tracking-widest hover:opacity-90 visited:opacity-70 transition-opacity"
           >
             Add to Cart
           </button>
