@@ -5,7 +5,7 @@ export const products = [
     name: "SK Retro Tracksuit", 
     category: "Tracksuits", 
     image: "/product.png", 
-    images: ["/product1.jpeg", "/product.png", "/product3.jpeg"],
+    images: ["/product1.jpeg", "new-products/tracksuit5.png", "/product3.jpeg"],
     description: "A premium retro-inspired tracksuit designed for comfort and a luxury aesthetic.",
     price: 50000, 
     sizes: ["XL", "2XL", "3XL"] 
@@ -15,8 +15,18 @@ export const products = [
     name: "SK Retro Tracksuit (Set)", 
     category: "Tracksuits", 
     image: "/product2.png", 
-    images: ["/product4.jpeg", "/product6a.jpeg", "/product25.jpeg"],
+    images: ["/product4.jpeg", "/new-products/tracksuit2.jpeg", "/new-products/tracksuit1.jpeg"],
     description: "Complete your look with this matching retro set, perfect for casual luxury outings.",
+    price: 50000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 3, 
+    name: "SK Retro Tracksuit (Mono)", 
+    category: "Tracksuits", 
+    image: "/product (7).png", 
+    images: ["/new-products/tracksuit6.jpeg", "/new-products/tracksuit3.jpeg", "/new-products/tracksuit4.jpeg"],
+    description: "Complete your look with this matching mono set, perfect for casual luxury outings.",
     price: 50000, 
     sizes: ["XL", "2XL", "3XL"] 
   },
@@ -41,7 +51,7 @@ export const products = [
     sizes: ["XL", "2XL", "3XL"] 
   },
 
-  // --- Category: Apparel ---
+  // --- Category: Tees ---
   { 
     id: 5, 
     name: "SK Nature Tee", 
@@ -49,7 +59,7 @@ export const products = [
     image: "/product (5).png", 
     images: ["/product (6).png", "/product5.jpeg", "/product5.jpeg"],
     description: "A minimalist tee crafted from high-quality, breathable fabric for daily wear.",
-    price: 25000, 
+    price: 30000, 
     sizes: ["XL", "2XL", "3XL"] 
   },
 
@@ -113,6 +123,28 @@ export const products = [
     image: "/product10a.png", 
     images: ["/product10a.png", "/product10.jpeg", "/product25.jpeg"],
     description: "A crisp white jacket that offers a clean, luxury look for any occasion.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+
+  // --- Category: Sleeveless ---
+  { 
+    id: 21, 
+    name: "SK Legacy Sleeveless ", 
+    category: "Sleeveless", 
+    image: "/product (8).png", 
+    images: ["/new-products/sleeveless1.jpeg", "/new-products/sleeveless1.jpeg", "/new-products/sleeveless1.jpeg"],
+    description: "A sleek sleeveless designed for layering in style.",
+    price: 30000, 
+    sizes: ["XL", "2XL", "3XL"] 
+  },
+  { 
+    id: 22, 
+     name: "SK Legacy Sleeveless", 
+    category: "Sleeveless", 
+    image: "/product (9).png", 
+    images: ["/new-products/sleeveless2.jpeg", "/new-products/sleeveless2.jpeg", "/new-products/sleeveless2.jpeg"],
+    description: "A sleek sleeveless  designed for layering in style.",
     price: 30000, 
     sizes: ["XL", "2XL", "3XL"] 
   }
