@@ -8,7 +8,7 @@ import { products } from "@/data/products";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 
-const categories = ["All", "Tracksuits", "Apparel", "Trousers", "Jackets"];
+const categories = ["All", "Tracksuits", "Tees", "Trousers", "Jackets", "Sleeveless"];
 
 export default function ShopDisplay() {
   const [activeCategory, setActiveCategory] = useState("All");

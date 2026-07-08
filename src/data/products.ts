@@ -4,8 +4,8 @@ export const products = [
     id: 1, 
     name: "SK Retro Tracksuit", 
     category: "Tracksuits", 
-    image: "/product1.png", 
-    images: ["/product1.jpeg", "/product1a.png", "/product3.jpeg"],
+    image: "/product.png", 
+    images: ["/product1.jpeg", "/product.png", "/product3.jpeg"],
     description: "A premium retro-inspired tracksuit designed for comfort and a luxury aesthetic.",
     price: 50000, 
     sizes: ["XL", "2XL", "3XL"] 
@@ -24,8 +24,8 @@ export const products = [
     id: 6, 
     name: "SK Retro Tracksuit (Variant)", 
     category: "Tracksuits", 
-    image: "/product14a.png", 
-    images: ["/product14.jpeg", "/product15.jpeg", "/product14a.png"],
+    image: "/product (1).png", 
+    images: ["/product14.jpeg", "/product15.jpeg", "/product (1).png"],
     description: "Our signature retro tracksuit in an exclusive variant colorway.",
     price: 50000, 
     sizes: ["XL", "2XL", "3XL"] 
@@ -34,8 +34,8 @@ export const products = [
     id: 26, 
     name: "SK Motion Tracksuit (Variant)", 
     category: "Tracksuits", 
-    image: "/product26a.png", 
-    images: ["/product20.jpeg", "/product26.jpeg", "/product26a.jpeg"],
+    image: "/product (3).png", 
+    images: ["/product (3).png", "/product (3).png", "/product (3).png"],
     description: "Engineered for movement without compromising on style.",
     price: 35000, 
     sizes: ["XL", "2XL", "3XL"] 
@@ -45,9 +45,9 @@ export const products = [
   { 
     id: 5, 
     name: "SK Nature Tee", 
-    category: "Apparel", 
-    image: "/product5a.png", 
-    images: ["/product5.jpeg", "/product5a.png", "/product5a.png"],
+    category: "Tees", 
+    image: "/product (5).png", 
+    images: ["/product (6).png", "/product5.jpeg", "/product5.jpeg"],
     description: "A minimalist tee crafted from high-quality, breathable fabric for daily wear.",
     price: 25000, 
     sizes: ["XL", "2XL", "3XL"] 
