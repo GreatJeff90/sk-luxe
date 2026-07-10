@@ -1,7 +1,7 @@
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
-// Define the structure of your product
 interface Product {
   id: number;
   name: string;
@@ -11,12 +11,10 @@ interface Product {
   sizes: string[];
 }
 
-// Define the structure of items in the cart
 interface CartItem extends Product {
   selectedSize: string;
 }
 
-// Define the Context shape
 interface CartContextType {
   cart: CartItem[];
   addToCart: (product: Product, size: string) => void;
@@ -27,13 +25,55 @@ const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // 1. Initial Load: Check LocalStorage AND Supabase
+  useEffect(() => {
+    const init = async () => {
+      // Load from LocalStorage first for instant UI
+      const savedCart = localStorage.getItem("sk_luxe_cart");
+      if (savedCart) setCart(JSON.parse(savedCart));
+
+      // Then check User Session
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setUserId(session.user.id);
+        const { data } = await supabase
+          .from("profiles")
+          .select("cart")
+          .eq("id", session.user.id)
+          .single();
+        
+        if (data?.cart) {
+          setCart(data.cart);
+          localStorage.setItem("sk_luxe_cart", JSON.stringify(data.cart));
+        }
+      }
+      setIsLoaded(true);
+    };
+    init();
+  }, []);
+
+  // 2. Sync to LocalStorage and DB whenever cart changes
+  const updateCartState = async (newCart: CartItem[]) => {
+    setCart(newCart);
+    localStorage.setItem("sk_luxe_cart", JSON.stringify(newCart));
+    
+    if (userId) {
+      await supabase
+        .from("profiles")
+        .update({ cart: newCart })
+        .eq("id", userId);
+    }
+  };
 
   const addToCart = (product: Product, size: string) => {
-    setCart((prev) => [...prev, { ...product, selectedSize: size }]);
+    updateCartState([...cart, { ...product, selectedSize: size }]);
   };
 
   const removeFromCart = (id: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    updateCartState(cart.filter((item) => item.id !== id));
   };
 
   return (
@@ -45,8 +85,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
+  if (!context) throw new Error("useCart must be used within a CartProvider");
   return context;
 };

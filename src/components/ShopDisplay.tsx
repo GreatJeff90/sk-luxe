@@ -24,7 +24,6 @@ export default function ShopDisplay() {
   }, [activeCategory]);
 
   return (
-    // Added dark:bg-black for background change
     <section className="py-16 bg-white dark:bg-black transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         
@@ -54,7 +53,6 @@ export default function ShopDisplay() {
                 key={product.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                // Added dark:bg-gray-900 and dark:border-gray-800
                 className="bg-white dark:bg-gray-900 p-2 md:p-4 group border border-gray-50 dark:border-gray-800 flex flex-col"
               >
                 <Link href={`/shop/${product.id}`} className="block">
@@ -76,13 +74,32 @@ export default function ShopDisplay() {
                 {/* Action Buttons */}
                 <div className="flex gap-1 mt-auto">
                     <button 
-                      onClick={(e) => { e.preventDefault(); inWishlist ? removeFromWishlist(product.id) : addToWishlist(product); }}
-                      className={`p-2 flex-1 border rounded-lg transition ${inWishlist ? "border-red-500 text-red-500" : "border-gray-200 dark:border-gray-700 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800"}`}
+                      onClick={(e) => { 
+                        e.preventDefault(); 
+                        inWishlist ? removeFromWishlist(product.id) : addToWishlist(product); 
+                      }}
+                      className={`p-2 flex-1 border rounded-lg transition ${
+                        inWishlist 
+                          ? "border-red-500 text-red-500" 
+                          : "border-gray-200 dark:border-gray-700 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
+                      }`}
                     >
                       <Heart size={16} fill={inWishlist ? "currentColor" : "none"} className="mx-auto" />
                     </button>
+                    
                     <button 
-                      onClick={(e) => { e.preventDefault(); addToCart({ ...product, id: Number(product.id) }, "Default"); }}
+                      onClick={(e) => { 
+                        e.preventDefault(); 
+                        // Ensure product object matches CartContext definition
+                        addToCart({ 
+                           ...product, 
+                           id: Number(product.id),
+                           category: product.category,
+                           image: product.image,
+                           price: product.price,
+                           sizes: product.sizes
+                        }, "Default"); 
+                      }}
                       className="p-2 flex-[2] bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition text-[10px] md:text-xs uppercase"
                     >
                       Add
