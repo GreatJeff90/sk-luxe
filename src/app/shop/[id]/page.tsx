@@ -5,11 +5,14 @@ import { products } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { CartItem } from "@/types/index";
 
 export default function ProductPage() {
   const { id } = useParams();
   const { addToCart } = useCart();
+  
   const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
   const [mainImage, setMainImage] = useState("");
   const [modalIndex, setModalIndex] = useState<number | null>(null);
 
@@ -19,6 +22,21 @@ export default function ProductPage() {
 
   const displayImage = mainImage || product.image;
   const images = product.images || [product.image];
+
+  const handleAddToCart = () => {
+  const size = selectedSize || product.sizes[0];
+  const color = selectedColor || (product.colors && product.colors.length > 0 ? product.colors[0] : "Default");
+  
+  // Explicitly type the constant as CartItem
+  const cartItem: CartItem = {
+    ...product,
+    selectedSize: size,
+    selectedColor: color
+  };
+
+  // TypeScript and ESLint will now be satisfied without 'as any'
+  addToCart(cartItem, size);
+};
 
   return (
     <main className="bg-white dark:bg-black min-h-screen py-20 md:py-20">
@@ -33,7 +51,6 @@ export default function ProductPage() {
             <Image src={displayImage} alt={product.name} fill className="object-cover" priority />
           </button>
           
-          {/* Larger Thumbnails */}
           <div className="grid grid-cols-4 gap-4">
             {images.map((img: string, idx: number) => (
               <button 
@@ -53,16 +70,41 @@ export default function ProductPage() {
           <p className="text-xl font-semibold mb-6 text-gray-700 dark:text-gray-300">₦{product.price.toLocaleString()}</p>
           <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">{product.description}</p>
 
-          <div className="mb-10">
+          {/* Size Selection */}
+          <div className="mb-6">
             <p className="text-sm font-medium mb-4 uppercase tracking-widest text-gray-500">Select size</p>
             <div className="flex flex-wrap gap-3">
               {product.sizes.map((size) => (
-                <button key={size} onClick={() => setSelectedSize(size)} className={`px-8 py-3 border rounded-full transition-all dark:text-white ${selectedSize === size ? "border-black dark:border-white bg-black dark:bg-white text-white dark:text-black" : "border-gray-200 dark:border-gray-700"}`}>{size}</button>
+                <button 
+                  key={size} 
+                  onClick={() => setSelectedSize(size)} 
+                  className={`px-8 py-3 border rounded-full transition-all dark:text-white ${selectedSize === size ? "border-black dark:border-white bg-black dark:bg-white text-white dark:text-black" : "border-gray-200 dark:border-gray-700"}`}
+                >
+                  {size}
+                </button>
               ))}
             </div>
           </div>
 
-          <button onClick={() => addToCart(product, selectedSize || product.sizes[0])} className="w-full md:w-auto bg-black dark:bg-white text-white dark:text-black py-4 px-12 rounded-full font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">
+          {/* Color Selection */}
+          {"colors" in product && product.colors && (
+            <div className="mb-10">
+              <p className="text-sm font-medium mb-4 uppercase tracking-widest text-gray-500">Select color</p>
+              <div className="flex flex-wrap gap-3">
+                {product.colors.map((color) => (
+                  <button 
+                    key={color} 
+                    onClick={() => setSelectedColor(color)} 
+                    className={`px-8 py-3 border rounded-full transition-all dark:text-white ${selectedColor === color ? "border-black dark:border-white bg-black dark:bg-white text-white dark:text-black" : "border-gray-200 dark:border-gray-700"}`}
+                  >
+                    {color}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <button onClick={handleAddToCart} className="w-full md:w-auto bg-black dark:bg-white text-white dark:text-black py-4 px-12 rounded-full font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">
             Add to Cart
           </button>
         </div>

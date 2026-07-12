@@ -87,23 +87,20 @@ export default function ShopDisplay() {
                       <Heart size={16} fill={inWishlist ? "currentColor" : "none"} className="mx-auto" />
                     </button>
                     
-                    <button 
-                      onClick={(e) => { 
-                        e.preventDefault(); 
-                        // Ensure product object matches CartContext definition
-                        addToCart({ 
-                           ...product, 
-                           id: Number(product.id),
-                           category: product.category,
-                           image: product.image,
-                           price: product.price,
-                           sizes: product.sizes
-                        }, "Default"); 
-                      }}
-                      className="p-2 flex-[2] bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition text-[10px] md:text-xs uppercase"
-                    >
-                      Add
-                    </button>
+                    <button
+  onClick={(e) => {
+    e.preventDefault();
+    // Construct a full CartItem object
+    addToCart({
+      ...product,
+      selectedSize: product.sizes[0] || "XL",
+      selectedColor: product.colors?.[0] || "Default",
+    }, product.sizes[0] || "XL"); // Ensure this matches your context signature
+  }}
+  className="p-2 flex-[2] bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition"
+>
+  Add
+</button>
                 </div>
               </motion.div>
             );

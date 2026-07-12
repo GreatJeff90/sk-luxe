@@ -1,4 +1,16 @@
-export const products = [
+export interface Product {
+  id: number;
+  name: string;
+  category: string;
+  image: string;
+  images?: string[];
+  description: string;
+  price: number;
+  sizes: string[];
+  colors?: string[];
+}
+
+export const products: Product[] =[
   // --- Category: Tracksuits (100+) ---
   { 
     id: 101, 
@@ -8,7 +20,8 @@ export const products = [
     images: ["/product1.jpeg", "/new-products/tracksuit5.jpeg", "/model3.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 50000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Black"] 
   },
   { 
     id: 102, 
@@ -18,7 +31,8 @@ export const products = [
     images: ["/product4.jpeg", "/new-products/tracksuit2.jpeg", "/product21.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 50000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["White"] 
   },
   { 
     id: 103, 
@@ -28,7 +42,8 @@ export const products = [
     images: ["/new-products/tracksuit6.jpeg", "/new-products/tracksuit3.jpeg", "/new-products/tracksuit4.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 50000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Black & White"] 
   },
   { 
     id: 104, 
@@ -38,7 +53,8 @@ export const products = [
     images: ["/product14.jpeg", "/product15.jpeg", "/product (1).png"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 50000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Red",] 
   },
   { 
     id: 105, 
@@ -48,7 +64,8 @@ export const products = [
     images: ["/product20.jpeg", "/product (3).png", "/product (3).png"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
     price: 35000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Blue & Red with White Pants"] 
   },
 
   // --- Category: Tees (200+) ---
@@ -60,7 +77,8 @@ export const products = [
     images: ["/product (6).png", "/product5.jpeg", "/product5.jpeg"],
     description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Black", "White",] 
   },
   { 
     id: 202, 
@@ -70,7 +88,8 @@ export const products = [
     images: ["/model2.jpeg", "/new-products/tee8.jpeg", "/model1.jpeg"],
     description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["White"] 
   },
   { 
     id: 203, 
@@ -80,7 +99,8 @@ export const products = [
     images: ["/new-products/tee9.jpeg", "/new-products/tee7.jpeg", "/new-products/tee6.jpeg"],
     description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["White",] 
   },
   { 
     id: 204, 
@@ -90,7 +110,8 @@ export const products = [
     images: ["/new-products/tee1.jpeg", "/new-products/tee1.jpeg", "/new-products/tee1.jpeg"],
     description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Midnight Blue"] 
   },
   { 
     id: 205, 
@@ -100,7 +121,8 @@ export const products = [
     images: ["/new-products/tee2.jpeg", "/new-products/tee2.jpeg", "/new-products/tee2.jpeg"],
     description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Dark Navy"] 
   },
   { 
     id: 206, 
@@ -110,7 +132,8 @@ export const products = [
     images: ["/new-products/tee3.jpeg", "/new-products/tee3.jpeg", "/new-products/tee3.jpeg"],
     description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["White"] 
   },
   { 
     id: 207, 
@@ -120,7 +143,8 @@ export const products = [
     images: ["/new-products/tee4.jpeg", "/new-products/tee4.jpeg", "/new-products/tee4.jpeg"],
     description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Purple"] 
   },
   { 
     id: 208, 
@@ -130,7 +154,8 @@ export const products = [
     images: ["/new-products/tee5.jpeg", "/new-products/tee5.jpeg", "/new-products/tee5.jpeg"],
     description: "Crafted from ultra-soft, high-density cotton, these tees offer a sophisticated drape and minimalist aesthetic designed to elevate your everyday ensemble.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["White"] 
   },
 
   // --- Category: Trousers (300+) ---
@@ -139,31 +164,34 @@ export const products = [
     name: "SK Everyday SweatPants", 
     category: "Trousers", 
     image: "/product (11).png", 
-    images: ["/product8.jpeg", "/product13.jpeg", "/product13a.png"],
+    images: ["/product (12).png", "/product (13).png",  "/product (14).png"],
     description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Black", "Grey"] 
   },
   { 
     id: 302, 
     name: "SK Everyday SweatPants", 
     category: "Trousers", 
-    image: "/product9.jpeg", 
-    images: ["/product11.jpeg", "/product12.jpeg", "/product9a.png"],
+    image: "/product (16).png", 
+    images: ["/product (15).png", "/product (17).png", "/product9a.png"],
     description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
     price: 25000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Black", "Navy"] 
   },
-  { 
-    id: 303, 
-    name: "SK Everyday SweatPants", 
-    category: "Trousers", 
-    image: "/product23.jpeg", 
-    images: ["/product23a.png", "/product23a.png", "/product23a.png"],
-    description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
-    price: 25000, 
-    sizes: ["XL", "2XL", "3XL"] 
-  },
+  // { 
+  //   id: 303, 
+  //   name: "SK Everyday SweatPants", 
+  //   category: "Trousers", 
+  //   image: "/product23.jpeg", 
+  //   images: ["/product23a.png", "/product23a.png", "/product23a.png"],
+  //   description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
+  //   price: 25000, 
+  //   sizes: ["XL", "2XL", "3XL"],
+  //   colors: ["Black"] 
+  // },
 
   // --- Category: Jackets (400+) ---
   { 
@@ -174,7 +202,8 @@ export const products = [
     images: ["/product1b.jpeg", "/model3.jpeg", "/product3a.png"],
     description: "Our jackets are designed to make a statement while providing effortless protection. Featuring meticulous craftsmanship, technical detailing, and high-quality finishes, they are the perfect layer for transitioning through the seasons.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Black"] 
   },
   { 
     id: 402, 
@@ -184,7 +213,8 @@ export const products = [
     images: ["/product10a.png", "/product10.jpeg", "/product25.jpeg"],
     description: "Our jackets are designed to make a statement while providing effortless protection. Featuring meticulous craftsmanship, technical detailing, and high-quality finishes, they are the perfect layer for transitioning through the seasons.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["White", "Off-White"] 
   },
 
   // --- Category: Sleeveless (500+) ---
@@ -196,7 +226,8 @@ export const products = [
     images: ["/new-products/sleeveless1.jpeg", "/new-products/sleeveless1.jpeg", "/new-products/sleeveless1.jpeg"],
     description: "Our sleeveless collection emphasizes clean lines and unrestricted movement, offering a sleek, contemporary edge for those who prefer a sharp, focused look.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Black", "White"] 
   },
   { 
     id: 502, 
@@ -206,6 +237,7 @@ export const products = [
     images: ["/new-products/sleeveless2.jpeg", "/new-products/sleeveless2.jpeg", "/new-products/sleeveless2.jpeg"],
     description: "Our sleeveless collection emphasizes clean lines and unrestricted movement, offering a sleek, contemporary edge for those who prefer a sharp, focused look.",
     price: 30000, 
-    sizes: ["XL", "2XL", "3XL"] 
+    sizes: ["XL", "2XL", "3XL"],
+    colors: ["Black", "Grey"] 
   }
 ];

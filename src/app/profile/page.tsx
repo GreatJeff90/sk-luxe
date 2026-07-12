@@ -9,6 +9,7 @@ interface Order {
   status: string;
   total_amount: number;
   created_at: string;
+  user_id: string; // Ensure this is included in the interface
 }
 
 export default function ProfilePage() {
@@ -22,13 +23,18 @@ export default function ProfilePage() {
       if (!session) { router.push("/login"); return; }
       setUser(session.user);
 
-      const { data } = await supabase
+      // Updated to include user_id in the select statement
+      const { data, error } = await supabase
         .from("orders")
-        .select("id, status, total_amount, created_at")
+        .select("id, status, total_amount, created_at, user_id")
         .eq("user_id", session.user.id)
         .order("created_at", { ascending: false });
 
-      if (data) setOrders(data);
+      if (error) {
+        console.error("Error fetching orders:", error);
+      } else {
+        setOrders(data || []);
+      }
     };
     fetchUserData();
   }, [router]);
@@ -36,7 +42,8 @@ export default function ProfilePage() {
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case 'paid': return 'bg-green-100 text-green-700';
-      case 'pending': return 'bg-yellow-100 text-yellow-700';
+      case 'pending': 
+      case 'pending_transfer': return 'bg-yellow-100 text-yellow-700';
       default: return 'bg-gray-100 text-gray-700';
     }
   };
@@ -46,14 +53,12 @@ export default function ProfilePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-6">
-        {/* Header */}
         <div className="mb-10">
           <h1 className="text-2xl font-bold text-gray-900">My Profile</h1>
           <p className="text-gray-500">Manage your account information and order history.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Sidebar */}
           <div className="space-y-6">
             <div className="bg-white p-6 rounded-xl border border-gray-200">
               <h3 className="text-sm font-semibold text-gray-900 mb-4">Account</h3>
@@ -68,7 +73,6 @@ export default function ProfilePage() {
             </button>
           </div>
 
-          {/* Orders Table */}
           <div className="md:col-span-2 space-y-4">
             <h3 className="text-sm font-semibold text-gray-900">Order History</h3>
             {orders.length > 0 ? (
@@ -81,7 +85,7 @@ export default function ProfilePage() {
                     </div>
                     <div className="text-right">
                       <span className={`px-2 py-1 rounded-full text-[10px] uppercase font-bold ${getStatusColor(order.status)}`}>
-                        {order.status}
+                        {order.status.replace('_', ' ')}
                       </span>
                       <p className="text-sm font-bold text-gray-900 mt-1">₦{order.total_amount.toLocaleString()}</p>
                     </div>

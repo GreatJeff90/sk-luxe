@@ -5,6 +5,8 @@ import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { Trash2, ShoppingCart } from "lucide-react";
+import { Product } from "@/data/products"; 
+import { CartItem } from "@/types/index";
 
 export default function WishlistPage() {
   const { wishlist, removeFromWishlist } = useWishlist();
@@ -19,6 +21,25 @@ export default function WishlistPage() {
   if (!isReady) {
     return <div className="min-h-screen flex items-center justify-center text-black">Loading...</div>;
   }
+
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ const handleMoveToCart = (item: any) => {
+  // 2. Explicitly construct the object to satisfy all 'Product' requirements
+  const productWithAllFields: Product = {
+    ...item,
+    description: item.description || "No description available", // Ensure this exists
+    sizes: item.sizes || [],
+    category: item.category || "Uncategorized"
+  };
+
+  const cartItem: CartItem = {
+    ...productWithAllFields,
+    selectedSize: productWithAllFields.sizes[0] || "XL",
+    selectedColor: productWithAllFields.colors?.[0] || "Default",
+  };
+
+  addToCart(cartItem, cartItem.selectedSize);
+};
 
   return (
     <main className="min-h-screen bg-white py-20">
@@ -47,7 +68,7 @@ export default function WishlistPage() {
 
                 <div className="flex items-center gap-2">
                   <button 
-                    onClick={() => addToCart({ ...product, id: Number(product.id) }, "Default")}
+                    onClick={() => handleMoveToCart(product)}
                     className="p-3 bg-gray-100 hover:bg-black hover:text-white rounded-full transition-colors"
                     title="Add to Cart"
                   >

@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { CartItem } from "@/types/index";
 
 interface Product {
   id: number;
@@ -9,15 +10,16 @@ interface Product {
   image: string;
   price: number;
   sizes: string[];
-}
-
-interface CartItem extends Product {
+  selectedColor?: string;
   selectedSize: string;
 }
 
+
+
+
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: Product, size: string) => void;
+  addToCart: (product: CartItem, size: string) => void;
   removeFromCart: (id: number) => void;
 }
 
@@ -68,8 +70,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const addToCart = (product: Product, size: string) => {
-    updateCartState([...cart, { ...product, selectedSize: size }]);
+  const addToCart = (product: CartItem, size: string) => {
+   updateCartState([...cart, product]);
   };
 
   const removeFromCart = (id: number) => {
