@@ -67,7 +67,12 @@ export default function ShopDisplay() {
                   </div>
                   <div className="space-y-0.5 mb-4">
                     <h3 className="text-[10px] md:text-sm uppercase tracking-widest font-medium text-black dark:text-white truncate">{product.name}</h3>
-                    <p className="text-[10px] md:text-sm font-bold text-black dark:text-white">₦{product.price.toLocaleString()}</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-[10px] md:text-sm font-bold text-black dark:text-white">₦{product.price.toLocaleString()}</p>
+                      {product.originalPrice && (
+                        <p className="text-[9px] md:text-xs text-gray-500 line-through">₦{product.originalPrice.toLocaleString()}</p>
+                      )}
+                    </div>
                   </div>
                 </Link>
                 
@@ -88,19 +93,18 @@ export default function ShopDisplay() {
                     </button>
                     
                     <button
-  onClick={(e) => {
-    e.preventDefault();
-    // Construct a full CartItem object
-    addToCart({
-      ...product,
-      selectedSize: product.sizes[0] || "XL",
-      selectedColor: product.colors?.[0] || "Default",
-    }, product.sizes[0] || "XL"); // Ensure this matches your context signature
-  }}
-  className="p-2 flex-[2] bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition"
->
-  Add
-</button>
+                      onClick={(e) => {
+                        e.preventDefault();
+                        addToCart({
+                          ...product,
+                          selectedSize: product.sizes[0] || "XL",
+                          selectedColor: product.colors?.[0] || "Default",
+                        }, product.sizes[0] || "XL");
+                      }}
+                      className="p-2 flex-[2] bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition"
+                    >
+                      Add
+                    </button>
                 </div>
               </motion.div>
             );

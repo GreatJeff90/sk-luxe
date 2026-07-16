@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiInstagram, FiTwitter, FiFacebook } from "react-icons/fi";
+import { FiInstagram } from "react-icons/fi"; // Instagram
+import { FaTiktok } from "react-icons/fa";    // TikTok
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -15,10 +16,13 @@ export default function Footer() {
             <Image src="/logo-.png" alt="SK LUXE" width={100} height={40} className="brightness-0 invert" />
           </Link>
           <div className="flex space-x-6 pt-4">
+          <a href="https://instagram.com/06.skluxe" target="_blank" rel="noopener noreferrer">
             <FiInstagram className="cursor-pointer hover:text-gray-400 transition-colors" size={20} />
-            <FiTwitter className="cursor-pointer hover:text-gray-400 transition-colors" size={20} />
-            <FiFacebook className="cursor-pointer hover:text-gray-400 transition-colors" size={20} />
-          </div>
+          </a>
+          <a href="https://tiktok.com/@skluxe06" target="_blank" rel="noopener noreferrer">
+            <FaTiktok className="cursor-pointer hover:text-gray-400 transition-colors" size={20} />
+          </a>
+        </div>
         </div>
 
         {/* Navigation Links */}

@@ -6,6 +6,7 @@ export interface Product {
   images?: string[];
   description: string;
   price: number;
+  originalPrice?: number; // Add this optional field
   sizes: string[];
   colors?: string[];
 }
@@ -30,21 +31,23 @@ export const products: Product[] =[
     image: "/product2.png", 
     images: ["/product4.jpeg", "/new-products/tracksuit2.jpeg", "/product21.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
-    price: 50000, 
+    price: 35000, 
+    originalPrice: 50000, // Add this
     sizes: ["XL", "2XL", "3XL"],
     colors: ["White"] 
-  },
-  { 
+},
+{ 
     id: 103, 
     name: "SK Retro Tracksuit (Mono)", 
     category: "Tracksuits", 
     image: "/product (10).png", 
     images: ["/new-products/tracksuit6.jpeg", "/new-products/tracksuit3.jpeg", "/new-products/tracksuit4.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
-    price: 50000, 
+    price: 35000, 
+    originalPrice: 50000, // Add this
     sizes: ["XL", "2XL", "3XL"],
     colors: ["Black & White"] 
-  },
+},
   { 
     id: 104, 
     name: "SK Retro Tracksuit (Variant)", 
