@@ -19,7 +19,7 @@ export default function Footer() {
 }, [images.length]);
 
   return (
-    <footer className="bg-black text-white pt-20 border-t border-zinc-900">
+    <footer className="bg-black text-white pt-20  border-zinc-900">
       {/* Fade-in Slider - Increased height for small screens */}
       <div className="relative w-full h-[600px] md:h-[500px] mb-20 overflow-hidden">
         <AnimatePresence mode="wait">
