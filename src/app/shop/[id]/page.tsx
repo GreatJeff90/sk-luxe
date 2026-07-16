@@ -24,19 +24,17 @@ export default function ProductPage() {
   const images = product.images || [product.image];
 
   const handleAddToCart = () => {
-  const size = selectedSize || product.sizes[0];
-  const color = selectedColor || (product.colors && product.colors.length > 0 ? product.colors[0] : "Default");
-  
-  // Explicitly type the constant as CartItem
-  const cartItem: CartItem = {
-    ...product,
-    selectedSize: size,
-    selectedColor: color
-  };
+    const size = selectedSize || product.sizes[0];
+    const color = selectedColor || (product.colors && product.colors.length > 0 ? product.colors[0] : "Default");
+    
+    const cartItem: CartItem = {
+      ...product,
+      selectedSize: size,
+      selectedColor: color
+    };
 
-  // TypeScript and ESLint will now be satisfied without 'as any'
-  addToCart(cartItem, size);
-};
+    addToCart(cartItem, size);
+  };
 
   return (
     <main className="bg-white dark:bg-black min-h-screen py-20 md:py-20">
@@ -67,7 +65,15 @@ export default function ProductPage() {
         {/* Details Section */}
         <div className="flex flex-col">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">{product.name}</h1>
-          <p className="text-xl font-semibold mb-6 text-gray-700 dark:text-gray-300">₦{product.price.toLocaleString()}</p>
+          
+          {/* Price Section */}
+          <div className="flex items-center gap-3 mb-6">
+            <p className="text-2xl font-bold text-black dark:text-white">₦{product.price.toLocaleString()}</p>
+            {product.originalPrice && (
+              <p className="text-lg text-gray-500 line-through">₦{product.originalPrice.toLocaleString()}</p>
+            )}
+          </div>
+
           <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">{product.description}</p>
 
           {/* Size Selection */}
