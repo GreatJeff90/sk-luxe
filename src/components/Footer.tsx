@@ -8,20 +8,20 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const images = ['/model3.jpeg', '/product16.jpeg', '/new-products/tracksuit7.jpeg'];
+  const images = ['/model3.jpeg', '/product16.jpeg', '/new-products/tracksuit7.jpg'];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
-    }, 4000); // Change image every 4 seconds
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <footer className="bg-black text-white pt-20 border-t border-zinc-900">
-      {/* Fade-in Slider */}
-      <div className="relative w-full h-[300px] md:h-[400px] mb-20 overflow-hidden">
+      {/* Fade-in Slider - Increased height for small screens */}
+      <div className="relative w-full h-[400px] md:h-[500px] mb-20 overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={images[index]}
@@ -42,8 +42,9 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-16 pb-20">
-        {/* Brand Section */}
-        <div className="md:col-span-5 space-y-6">
+        
+        {/* Brand Section - Centralized on small screens */}
+        <div className="md:col-span-5 flex flex-col items-center text-center md:items-start md:text-left space-y-6">
           <Link href="/" className="inline-block">
             <Image src="/logo-.png" alt="SK LUXE" width={100} height={40} className="brightness-0 invert" />
           </Link>
@@ -63,7 +64,7 @@ export default function Footer() {
         </div>
 
         {/* Links Section */}
-        <div className="md:col-span-7 grid grid-cols-2 gap-8">
+        <div className="md:col-span-7 grid grid-cols-2 gap-8 text-center md:text-left">
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-6">Navigation</h4>
             <ul className="space-y-4 text-sm font-light">
@@ -81,7 +82,6 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-zinc-400">
               <li>support@sk-luxe.com</li>
               <li>+234 812 372 0849</li>
-              <li className="pt-2 text-[10px] uppercase tracking-widest text-zinc-600 italic">Port Harcourt, NG</li>
             </ul>
           </div>
         </div>
