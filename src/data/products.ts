@@ -44,8 +44,8 @@ export const products: Product[] =[
     image: "/product (10).png", 
     images: ["/new-products/tracksuit6.jpeg", "/new-products/tracksuit3.jpeg", "/new-products/tracksuit4.jpeg"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
-    price: 45000, 
-    originalPrice: 60000, // Add this
+    price: 35000, 
+    originalPrice: 50000, // Add this
     sizes: ["XL", "2XL", "3XL"],
     colors: ["Black & White"] 
 },
@@ -68,8 +68,8 @@ export const products: Product[] =[
     image: "/product (3).png", 
     images: ["/product20.jpeg", "/product (3).png", "/product (3).png"],
     description: "Our tracksuits feature premium, breathable fabrics and precise tailoring to ensure comfort without compromising on a sharp, modern silhouette.",
-    price: 45000, 
-    originalPrice: 60000,
+    price: 35000, 
+    originalPrice: 50000,
     sizes: ["XL", "2XL", "3XL"],
     colors: ["Blue & Red with White Pants"] 
   },
