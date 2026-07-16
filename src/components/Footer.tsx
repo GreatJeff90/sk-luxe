@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const images = ['/model3.jpeg', '/product16.jpeg', '/tracksuit7.jpeg'];
+  const images = ['/model3.jpeg', '/product16.jpeg', '/new-products/tracksuit7.jpeg'];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
