@@ -181,7 +181,7 @@ export const products: Product[] =[
     name: "SK Everyday SweatPants", 
     category: "Trousers", 
     image: "/product (16).png", 
-    images: ["/product (15).png", "/product (17).png", "/product9a.png"],
+    images: ["/product (15).png", "/product (17).png", "/product (11).png"],
     description: "Whether you are navigating the city or seeking an elevated casual look, our trousers provide a structured fit that moves with you, designed for versatility and timeless style.",
     price: 25000, 
     sizes: ["XL", "2XL", "3XL"],
@@ -200,28 +200,28 @@ export const products: Product[] =[
   // },
 
   // --- Category: Jackets (400+) ---
-  { 
-    id: 401, 
-    name: "Black Zip Jacket", 
-    category: "Jackets", 
-    image: "/product3a.png", 
-    images: ["/product1b.jpeg", "/model3.jpeg", "/product3a.png"],
-    description: "Our jackets are designed to make a statement while providing effortless protection. Featuring meticulous craftsmanship, technical detailing, and high-quality finishes, they are the perfect layer for transitioning through the seasons.",
-    price: 30000, 
-    sizes: ["XL", "2XL", "3XL"],
-    colors: ["Black"] 
-  },
-  { 
-    id: 402, 
-    name: "White Zip Jacket", 
-    category: "Jackets", 
-    image: "/product10a.png", 
-    images: ["/product10a.png", "/product10.jpeg", "/product25.jpeg"],
-    description: "Our jackets are designed to make a statement while providing effortless protection. Featuring meticulous craftsmanship, technical detailing, and high-quality finishes, they are the perfect layer for transitioning through the seasons.",
-    price: 30000, 
-    sizes: ["XL", "2XL", "3XL"],
-    colors: ["White", "Off-White"] 
-  },
+  // { 
+  //   id: 401, 
+  //   name: "Black Zip Jacket", 
+  //   category: "Jackets", 
+  //   image: "/product3a.png", 
+  //   images: ["/product1b.jpeg", "/model3.jpeg", "/product3a.png"],
+  //   description: "Our jackets are designed to make a statement while providing effortless protection. Featuring meticulous craftsmanship, technical detailing, and high-quality finishes, they are the perfect layer for transitioning through the seasons.",
+  //   price: 30000, 
+  //   sizes: ["XL", "2XL", "3XL"],
+  //   colors: ["Black"] 
+  // },
+  // { 
+  //   id: 402, 
+  //   name: "White Zip Jacket", 
+  //   category: "Jackets", 
+  //   image: "/product10a.png", 
+  //   images: ["/product10a.png", "/product10.jpeg", "/product25.jpeg"],
+  //   description: "Our jackets are designed to make a statement while providing effortless protection. Featuring meticulous craftsmanship, technical detailing, and high-quality finishes, they are the perfect layer for transitioning through the seasons.",
+  //   price: 30000, 
+  //   sizes: ["XL", "2XL", "3XL"],
+  //   colors: ["White", "Off-White"] 
+  // },
 
   // --- Category: Sleeveless (500+) ---
   { 
