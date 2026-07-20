@@ -46,7 +46,7 @@ export default function Footer() {
         {/* Brand Section - Centralized on small screens */}
         <div className="md:col-span-5 flex flex-col items-center text-center md:items-start md:text-left space-y-6">
           <Link href="/" className="inline-block">
-            <Image src="/logo-.png" alt="SK LUXE" width={100} height={40} className="brightness-0 invert" />
+            <Image src="/emblem.png" alt="SK LUXE" width={100} height={40} className="brightness-0 invert" />
           </Link>
           <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
             Silent Krown is a luxury streetwear brand built on quiet confidence. We create timeless pieces for people who believe success is earned through discipline, consistency, and purpose—not noise. Every collection reflects our philosophy: move with intention, stay true to yourself, and let your work speak.

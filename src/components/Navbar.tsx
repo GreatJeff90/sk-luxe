@@ -32,7 +32,7 @@ export default function Navbar() {
           <button onClick={() => setIsSidebarOpen(true)} className="md:hidden"><Menu size={24} /></button>
           
           <Link href="/" className="flex items-center">
-            <Image src="/logo-.png" alt="Silent King Logo" width={80} height={40} className="object-contain brightness-0 invert" />
+            <Image src="/emblem.png" alt="Silent King Logo" width={80} height={40} className="object-contain brightness-0 invert" />
           </Link>
 
           <div className="hidden md:flex gap-8 text-xs font-medium uppercase tracking-widest text-gray-400">

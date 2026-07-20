@@ -32,7 +32,7 @@ export default function MobileSidebar({ isOpen, onClose }: SidebarProps) {
         
         {/* Header */}
         <div className="p-6 flex justify-between items-center border-b dark:border-gray-800 shrink-0">
-          <Image src="/logo-.png" alt="Silent King Logo" width={80} height={40} className="object-contain dark:invert" />
+          <Image src="/emblem.png" alt="Silent King Logo" width={80} height={40} className="object-contain dark:invert" />
           <button onClick={onClose}><X size={24} /></button>
         </div>
         
@@ -66,7 +66,7 @@ export default function MobileSidebar({ isOpen, onClose }: SidebarProps) {
         {/* Footer */}
         <div className="border-t dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-6 space-y-6">
           <div className="space-y-2">
-            <Image src="/logo-.png" alt="Silent King Logo" width={60} height={30} className="object-contain opacity-70 dark:invert" />
+            <Image src="/emblem.png" alt="Silent King Logo" width={60} height={30} className="object-contain opacity-70 dark:invert" />
             <p className="text-[10px] uppercase tracking-widest text-gray-500 dark:text-gray-400 leading-relaxed">
               Defining modern luxury through meticulous craftsmanship and editorial design.
             </p>

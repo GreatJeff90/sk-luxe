@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "SK LUXE",
   description: "Luxury fashion and apparel",
   icons: {
-    icon: "/logo.png",
+    icon: "/emblem.png",
   },
 };
 

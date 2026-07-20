@@ -36,7 +36,7 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <div className="relative w-24 h-12 mx-auto mb-4">
              <Image 
-                src="/logo-.png" 
+                src="/emblem.png" 
                 alt="Brand Logo" 
                 fill 
                 className="object-contain" 
